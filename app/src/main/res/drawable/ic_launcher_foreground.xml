@@ -4,32 +4,81 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <group
-        android:translateX="0"
-        android:translateY="0">
-        <!-- Flag pole -->
-        <path
-            android:pathData="M32,24h6v60h-6z"
-            android:fillColor="#E2E8F0" />
-        <!-- Pole top sphere -->
-        <path
-            android:pathData="M35,21m-4,0a4,4 0 1,0 8,0a4,4 0 1,0 -8,0"
-            android:fillColor="#F59E0B" />
-        <!-- Flag Banner Strip 1 (Top - Red) -->
-        <path
-            android:pathData="M38,26 C50,23 60,30 76,26 L76,38 C60,42 50,35 38,38 Z"
-            android:fillColor="#EF4444" />
-        <!-- Flag Banner Strip 2 (Middle - Yellow) -->
-        <path
-            android:pathData="M38,38 C50,35 60,42 76,38 L76,50 C60,54 50,47 38,50 Z"
-            android:fillColor="#EAB308" />
-        <!-- Flag Banner Strip 3 (Bottom - Blue) -->
-        <path
-            android:pathData="M38,50 C50,47 60,54 76,50 L76,62 C60,66 50,59 38,62 Z"
-            android:fillColor="#3B82F6" />
-        <!-- Globe star emblem in corner -->
-        <path
-            android:pathData="M57,44 l2,0 l1,-2 l1,2 l2,0 l-1.5,1.5 l0.5,2 l-2,-1 l-2,1 l0.5,-2 z"
-            android:fillColor="#FFFFFF" />
-    </group>
+
+    <!-- Outer 4-Color D-Pad Ring Segments (Safe Zone r=32 around 54,54) -->
+    <!-- Top Red Arc -->
+    <path
+        android:pathData="M34,34 A28,28 0 0,1 74,34"
+        android:strokeWidth="3.2"
+        android:strokeColor="#EF4444"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000" />
+    <!-- Right Green Arc -->
+    <path
+        android:pathData="M74,34 A28,28 0 0,1 74,74"
+        android:strokeWidth="3.2"
+        android:strokeColor="#10B981"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000" />
+    <!-- Bottom Blue Arc -->
+    <path
+        android:pathData="M74,74 A28,28 0 0,1 34,74"
+        android:strokeWidth="3.2"
+        android:strokeColor="#3B82F6"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000" />
+    <!-- Left Amber/Yellow Arc -->
+    <path
+        android:pathData="M34,74 A28,28 0 0,1 34,34"
+        android:strokeWidth="3.2"
+        android:strokeColor="#F59E0B"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000" />
+
+    <!-- Globe Circle Base -->
+    <path
+        android:pathData="M54,54m-23,0a23,23 0 1,0 46,0a23,23 0 1,0 -46,0"
+        android:fillColor="#1E293B"
+        android:strokeWidth="1.5"
+        android:strokeColor="#38BDF8" />
+
+    <!-- Globe Latitude & Longitude Grid Lines -->
+    <path
+        android:pathData="M31,54 Q54,46 77,54 Q54,62 31,54"
+        android:strokeWidth="1.2"
+        android:strokeColor="#4438BDF8"
+        android:fillColor="#00000000" />
+    <path
+        android:pathData="M54,31 Q45,54 54,77 Q63,54 54,31"
+        android:strokeWidth="1.2"
+        android:strokeColor="#4438BDF8"
+        android:fillColor="#00000000" />
+
+    <!-- Flag Pole -->
+    <path
+        android:pathData="M40,34h3.5v42h-3.5z"
+        android:fillColor="#F8FAFC" />
+    <!-- Gold Finial Sphere -->
+    <path
+        android:pathData="M41.75,32m-3,0a3,3 0 1,0 6,0a3,3 0 1,0 -6,0"
+        android:fillColor="#FBBF24" />
+
+    <!-- Waving Flag Banner (3 vibrant stripes + star) -->
+    <!-- Top Stripe (Red) -->
+    <path
+        android:pathData="M43.5,35 C52,32 60,39 70,35 L70,43.5 C60,47.5 52,40.5 43.5,43.5 Z"
+        android:fillColor="#EF4444" />
+    <!-- Middle Stripe (Gold) -->
+    <path
+        android:pathData="M43.5,43.5 C52,40.5 60,47.5 70,43.5 L70,52 C60,56 52,49 43.5,52 Z"
+        android:fillColor="#F59E0B" />
+    <!-- Bottom Stripe (Emerald/Blue) -->
+    <path
+        android:pathData="M43.5,52 C52,49 60,56 70,52 L70,60.5 C60,64.5 52,57.5 43.5,60.5 Z"
+        android:fillColor="#10B981" />
+
+    <!-- White Star Emblem on Flag -->
+    <path
+        android:pathData="M56.5,43.5 l1.5,3 l3.3,0.5 l-2.4,2.3 l0.6,3.2 l-3,-1.6 l-3,1.6 l0.6,-3.2 l-2.4,-2.3 l3.3,-0.5 z"
+        android:fillColor="#FFFFFF" />
 </vector>

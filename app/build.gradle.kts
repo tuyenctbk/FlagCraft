@@ -1,4 +1,12 @@
 import com.google.gms.googleservices.GoogleServicesPlugin.MissingGoogleServicesStrategy
+import java.util.Properties
+
+val localProperties = Properties().apply {
+  val localPropertiesFile = rootProject.file("local.properties")
+  if (localPropertiesFile.exists()) {
+    localPropertiesFile.inputStream().use { load(it) }
+  }
+}
 
 plugins {
   alias(libs.plugins.android.application)
@@ -26,14 +34,25 @@ android {
   // and updating Android apps in AI Studio.
   signingConfigs {
     create("release") {
-      val keystorePath = System.getenv("KEYSTORE_PATH") ?: "${rootDir}/my-upload-key.jks"
-      storeFile = file(keystorePath)
-      storePassword = System.getenv("STORE_PASSWORD")
-      keyAlias = "upload"
-      keyPassword = System.getenv("KEY_PASSWORD")
+      storeFile = rootProject.file(
+        localProperties.getProperty("STORE_FILE")
+          ?: localProperties.getProperty("RELEASE_STORE_FILE")
+          ?: "common_release_key.jks"
+      )
+      storePassword = localProperties.getProperty("STORE_PASSWORD")
+        ?: localProperties.getProperty("RELEASE_STORE_PASSWORD")
+        ?: "dpadhero123"
+      keyAlias = localProperties.getProperty("KEY_ALIAS")
+        ?: localProperties.getProperty("RELEASE_KEY_ALIAS")
+        ?: "dpad_hero_alias"
+      keyPassword = localProperties.getProperty("KEY_PASSWORD")
+        ?: localProperties.getProperty("RELEASE_KEY_PASSWORD")
+        ?: "dpadhero123"
     }
     create("debugConfig") {
-      storeFile = file("${rootDir}/debug.keystore")
+      val localDebugKeystore = file("${rootDir}/debug.keystore")
+      val defaultDebugKeystore = file("${System.getProperty("user.home")}/.android/debug.keystore")
+      storeFile = if (localDebugKeystore.exists()) localDebugKeystore else defaultDebugKeystore
       storePassword = "android"
       keyAlias = "androiddebugkey"
       keyPassword = "android"
@@ -81,9 +100,13 @@ android {
 // Configure the Secrets Gradle Plugin to use .env and .env.example files
 // to match the convention used in Web projects.
 secrets {
-  propertiesFileName = ".env"
+  propertiesFileName = "local.properties"
   defaultPropertiesFileName = ".env.example"
   ignoreList.add("FIREBASE_APPCHECK_DEBUG_TOKEN")
+  ignoreList.add("sdk.dir")
+  ignoreList.add("STORE_.*")
+  ignoreList.add("KEY_.*")
+  ignoreList.add("RELEASE_.*")
 }
 
 googleServices { missingGoogleServicesStrategy = MissingGoogleServicesStrategy.WARN }
