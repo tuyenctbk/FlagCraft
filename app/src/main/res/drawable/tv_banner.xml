@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="320dp"
+    android:height="180dp"
+    android:viewportWidth="320"
+    android:viewportHeight="180">
+
+    <!-- Background Base Navy Gradient Surface -->
+    <path
+        android:pathData="M0,0h320v180h-320z"
+        android:fillColor="#0F172A" />
+
+    <!-- Ambient Glow / Modern Geometric Background Layers -->
+    <path
+        android:pathData="M-20,-20 L240,-20 L160,180 L-20,180 Z"
+        android:fillColor="#1E293B" />
+
+    <path
+        android:pathData="M180,0 L340,0 L340,180 L220,180 Z"
+        android:fillColor="#162032" />
+
+    <!-- Directional Color Accent Strips on the Left Edge (UP=Red, LEFT=Yellow, RIGHT=Green, DOWN=Blue) -->
+    <path
+        android:pathData="M0,0h8v45h-8z"
+        android:fillColor="#EF4444" />
+    <path
+        android:pathData="M0,45h8v45h-8z"
+        android:fillColor="#D97706" />
+    <path
+        android:pathData="M0,90h8v45h-8z"
+        android:fillColor="#10B981" />
+    <path
+        android:pathData="M0,135h8v45h-8z"
+        android:fillColor="#2563EB" />
+
+    <!-- Flag Waving Graphic (Centered / Left) -->
+    <!-- Flag Pole -->
+    <path
+        android:pathData="M48,34h7v112h-7z"
+        android:fillColor="#94A3B8" />
+    <!-- Finial Gold Ball -->
+    <path
+        android:pathData="M51.5,30m-6.5,0a6.5,6.5 0 1,0 13,0a6.5,6.5 0 1,0 -13,0"
+        android:fillColor="#F59E0B" />
+
+    <!-- Flag Stripes Waving -->
+    <!-- Top Stripe Red -->
+    <path
+        android:pathData="M55,38 C80,30 100,48 135,38 L135,58 C100,68 80,50 55,58 Z"
+        android:fillColor="#EF4444" />
+    <!-- Middle Stripe Yellow -->
+    <path
+        android:pathData="M55,58 C80,50 100,68 135,58 L135,78 C100,88 80,70 55,78 Z"
+        android:fillColor="#F59E0B" />
+    <!-- Bottom Stripe Blue -->
+    <path
+        android:pathData="M55,78 C80,70 100,88 135,78 L135,98 C100,108 80,90 55,98 Z"
+        android:fillColor="#3B82F6" />
+
+    <!-- Star on Flag -->
+    <path
+        android:pathData="M88,62 l3,0 l1.5,-3 l1.5,3 l3,0 l-2.5,2 l1,3 l-3,-1.8 l-3,1.8 l1,-3 z"
+        android:fillColor="#FFFFFF" />
+
+    <!-- Globe Longitude & Latitude Rings -->
+    <path
+        android:pathData="M245,75m-38,0a38,38 0 1,0 76,0a38,38 0 1,0 -76,0"
+        android:strokeWidth="3"
+        android:strokeColor="#334155"
+        android:fillColor="#1E293B" />
+    <!-- Equator -->
+    <path
+        android:pathData="M207,75 Q245,65 283,75 Q245,85 207,75"
+        android:strokeWidth="2"
+        android:strokeColor="#3B82F6"
+        android:fillColor="#00000000" />
+    <!-- Meridian -->
+    <path
+        android:pathData="M245,37 Q230,75 245,113 Q260,75 245,37"
+        android:strokeWidth="2"
+        android:strokeColor="#38BDF8"
+        android:fillColor="#00000000" />
+
+    <!-- D-Pad Directional Indicators Graphic -->
+    <!-- Up indicator -->
+    <path
+        android:pathData="M245,46 L250,53 L240,53 Z"
+        android:fillColor="#EF4444" />
+    <!-- Down indicator -->
+    <path
+        android:pathData="M245,104 L250,97 L240,97 Z"
+        android:fillColor="#2563EB" />
+    <!-- Left indicator -->
+    <path
+        android:pathData="M216,75 L223,70 L223,80 Z"
+        android:fillColor="#D97706" />
+    <!-- Right indicator -->
+    <path
+        android:pathData="M274,75 L267,70 L267,80 Z"
+        android:fillColor="#10B981" />
+
+    <!-- Text Block: "FLAGCRAFT" in vector paths for reliable rendering on all Android TV versions -->
+    <!-- F -->
+    <path android:pathData="M148,60 h22 v5 h-16 v8 h13 v5 h-13 v14 h-6 z" android:fillColor="#FFFFFF" />
+    <!-- L -->
+    <path android:pathData="M174,60 h6 v27 h14 v5 h-20 z" android:fillColor="#FFFFFF" />
+    <!-- A -->
+    <path android:pathData="M197,60 h6 l9,32 h-6 l-2,-7 h-8 l-2,7 h-6 z M200,80 h6 l-3,-11 z" android:fillColor="#38BDF8" />
+    <!-- G -->
+    <path android:pathData="M217,76 c0,-10 6,-17 17,-17 c7,0 12,3 15,7 l-4,4 c-3,-3 -6,-5 -11,-5 c-8,0 -11,5 -11,11 c0,6 3,11 11,11 c4,0 7,-2 9,-4 v-5 h-8 v-5 h14 v13 c-4,4 -9,7 -15,7 c-11,0 -17,-7 -17,-17 z" android:fillColor="#F59E0B" />
+
+    <!-- Subtitle pill "TV PARTY SHOWDOWN" -->
+    <path
+        android:pathData="M148,102h145v18h-145z"
+        android:fillColor="#1E3A8A" />
+    <path
+        android:pathData="M148,102h3v18h-3z"
+        android:fillColor="#EF4444" />
+    <path
+        android:pathData="M290,102h3v18h-3z"
+        android:fillColor="#10B981" />
+
+    <!-- Tagline bar -->
+    <path
+        android:pathData="M48,155h245v2h-245z"
+        android:fillColor="#334155" />
+</vector>

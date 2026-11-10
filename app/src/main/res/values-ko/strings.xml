@@ -1,0 +1,154 @@
+<resources>
+    <!-- Application Platform Identity -->
+    <string name="app_name">FlagCraft</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">홈</string>
+    <string name="nav_cards">카드</string>
+    <string name="nav_blitz">블리츠</string>
+    <string name="nav_party">TV 파티</string>
+    <string name="nav_explorer">국가 탐색</string>
+    <string name="nav_stats">통계</string>
+    <string name="btn_back">뒤로</string>
+    <string name="btn_close">닫기</string>
+    <string name="btn_play_again">다시 플레이</string>
+    <string name="btn_home">홈</string>
+    <string name="btn_search">검색</string>
+    <string name="btn_clear">지우기</string>
+
+    <!-- Home Screen -->
+    <string name="home_tagline">REST Countries API • 거실 TV 퀴즈 대전</string>
+    <string name="home_supporter_badge">서포터 ⭐</string>
+    <string name="home_support_development">개발 후원하기</string>
+    <string name="home_tv_mode">TV 모드</string>
+    <string name="home_tv_mode_active_title">📺 Android TV 거실 파티 모드 활성화됨!</string>
+    <string name="home_ready_title">세계 국기를 완벽하게 마스터할 준비가 되셨나요?</string>
+    <string name="home_tv_mode_active_desc">리모컨 방향키 색상(위=빨강, 아래=파랑, 왼쪽=노랑, 오른쪽=초록)으로 소파에서 다함께 퀴즈 대결!</string>
+    <string name="home_ready_desc">%d개 국가를 탐색하고, 블리츠로 스피드를 겨루며, TV에서 친구들과 대결하세요!</string>
+    <string name="home_select_experience">모드 선택</string>
+
+    <!-- Game Modes -->
+    <string name="mode_blitz_title">60초 지리 블리츠</string>
+    <string name="mode_blitz_subtitle">출퇴근길 빠른 스피드 퀴즈. 최고 기록: %d점</string>
+    <string name="mode_blitz_subtitle_phone">간편하게 스와이프하는 스피드 퀴즈. 최고 점수: %d점</string>
+    <string name="mode_party_title">거실 TV 파티 쇼다운</string>
+    <string name="mode_party_subtitle">방향키 색상(위, 아래, 좌, 우)을 활용한 1~4인용 멀티플레이 대결.</string>
+    <string name="mode_party_subtitle_phone">턴제 소파 퀴즈 대전! 방향키 색상으로 1~4인 플레이 가능.</string>
+    <string name="mode_flashcards_title">스와이프 암기 플래시카드</string>
+    <string name="mode_flashcards_subtitle">수도, 통화, 인구, 국기를 완벽하게 학습하고 숙련도를 확인하세요.</string>
+    <string name="mode_flashcards_subtitle_phone">수도, 통화, 인구, 국기를 학습하고 숙련도 레벨을 관리하세요.</string>
+    <string name="mode_explorer_title">세계 국가 도감</string>
+    <string name="mode_explorer_subtitle">대륙별 탐색, 국기 검색 및 즐겨찾기 북마크 기능.</string>
+    <string name="mode_stats_title">학습 통계 &amp; 퀴즈 기록</string>
+    <string name="mode_stats_subtitle">퀴즈 점수, 정답률, 카드 마스터 현황을 한눈에 파악하세요.</string>
+
+    <!-- Support Development Card -->
+    <string name="support_card_title">인디 개발자 후원</string>
+    <string name="support_card_tagline">100% 무광고 • 추적기 없음 • 오픈 지리 데이터</string>
+    <string name="support_card_thank_you">FlagCraft를 응원해 주셔서 감사합니다! 여러분의 따뜻한 후원이 이 프로젝트를 무료, 오프라인, 최신 상태로 유지하게 합니다.</string>
+    <string name="support_card_desc">FlagCraft는 광고 없이 독립 개발자가 만듭니다. 자발적인 후원은 API 서버 유지, 새 퀴즈 추가, TV 최적화에 사용됩니다.</string>
+    <string name="support_card_btn_active">후원 관리 / 다시 팁 보내기</string>
+    <string name="support_card_btn_donate">FlagCraft 후원하기 (Google Play, PayPal, Ko-fi)</string>
+
+    <!-- Flashcards & Study -->
+    <string name="flashcards_title">플래시카드 학습</string>
+    <string name="filter_favorites_only">즐겨찾기만</string>
+    <string name="region_all">전체</string>
+    <string name="region_africa">아프리카</string>
+    <string name="region_americas">아메리카</string>
+    <string name="region_asia">아시아</string>
+    <string name="region_europe">유럽</string>
+    <string name="region_oceania">오세아니아</string>
+    <string name="flashcards_empty_title">카드를 찾을 수 없습니다</string>
+    <string name="flashcards_empty_subtitle">지역 필터를 변경하거나 국가를 즐겨찾기에 추가해 보세요</string>
+    <string name="flashcards_card_counter">카드 %1$d / %2$d</string>
+    <string name="flashcards_status_mastered">마스터</string>
+    <string name="flashcards_status_learning">학습 중</string>
+    <string name="flashcards_status_review">복습</string>
+    <string name="flashcard_swipe_hint">탭하여 뒤집기 • 스와이프 👈 복습 | 마스터 👉</string>
+    <string name="flashcard_capital">수도</string>
+    <string name="flashcard_population">인구</string>
+    <string name="flashcard_currencies">통화</string>
+    <string name="flashcard_languages">언어</string>
+    <string name="flashcard_btn_review">복습하기</string>
+    <string name="flashcard_btn_mastered">마스터됨</string>
+    <string name="flashcard_bookmark">국가 즐겨찾기</string>
+
+    <!-- Blitz Quiz -->
+    <string name="blitz_timer">타이머</string>
+    <string name="blitz_streak_badge">x%d 연속 정답! 🔥</string>
+    <string name="blitz_score_label">%d점</string>
+    <string name="blitz_times_up">시간 종료!</string>
+    <string name="blitz_final_score">점수: %d점</string>
+    <string name="blitz_stat_answered">답변 수</string>
+    <string name="blitz_stat_max_streak">최대 연속 정답</string>
+    <string name="blitz_value_moment_title">🎉 멋진 라운드였습니다!</string>
+    <string name="blitz_value_moment_desc">FlagCraft는 100% 무광고 인디 앱입니다. 재미있으셨다면 개발자에게 커피 한 잔을 선물해 주세요!</string>
+    <string name="blitz_value_moment_later">나중에</string>
+    <string name="blitz_value_moment_support">후원하기 ☕</string>
+
+    <!-- Party Mode -->
+    <string name="party_title">거실 TV 파티 쇼다운</string>
+    <string name="party_subtitle">대형 TV와 리모컨으로 즐기는 국기 퀴즈 대전</string>
+    <string name="party_select_players">플레이어 수 선택</string>
+    <string name="party_player_count">%d명</string>
+    <string name="party_players_count">%d명</string>
+    <string name="party_how_to_play_title">Android TV / 거실에서 플레이하는 방법</string>
+    <string name="party_how_to_play_desc">리모컨이나 키보드를 사용하세요: 위=빨강, 아래=파랑, 왼쪽=노랑, 오른쪽=초록. 제한 시간 내에 차례대로 정답을 맞혀보세요!</string>
+    <string name="party_btn_start">쇼다운 시작</string>
+    <string name="party_round_counter">라운드 %1$d / %2$d</string>
+    <string name="party_current_turn">%s의 차례</string>
+    <string name="party_winner_title">🏆 쇼다운 챔피언!</string>
+    <string name="party_winner_subtitle">축하합니다 %s!</string>
+    <string name="party_scores_title">최종 순위</string>
+
+    <!-- Country Explorer -->
+    <string name="explorer_title">세계 국가 도감</string>
+    <string name="explorer_search_placeholder">국가명, 수도, 국가 코드 검색…</string>
+    <string name="explorer_details_official_name">공식 명칭</string>
+    <string name="explorer_details_region">지역 &amp; 하위 지역</string>
+    <string name="explorer_details_capital">수도</string>
+    <string name="explorer_details_population">인구</string>
+    <string name="explorer_details_currency">통화</string>
+    <string name="explorer_details_languages">언어</string>
+    <string name="explorer_details_status">학습 상태</string>
+
+    <!-- Stats Screen -->
+    <string name="stats_title">학습 통계 &amp; 기록</string>
+    <string name="stats_blitz_best">블리츠 최고 점수</string>
+    <string name="stats_cards_mastered">마스터한 카드</string>
+    <string name="stats_cards_learning">학습 중인 카드</string>
+    <string name="stats_cards_overview">마스터 달성률</string>
+    <string name="stats_recent_history">최근 퀴즈 세션</string>
+    <string name="stats_history_empty">아직 퀴즈 기록이 없습니다. 블리츠나 TV 파티를 플레이하여 통계를 채워보세요!</string>
+
+    <!-- Support Dialog -->
+    <string name="support_dialog_title">FlagCraft 개발 후원</string>
+    <string name="support_dialog_subtitle">광고 없는 독립적인 지리 교육 앱 유지를 도와주세요</string>
+    <string name="support_tab_play">Google Play</string>
+    <string name="support_tab_paypal">PayPal</string>
+    <string name="support_tab_kofi">Ko-fi</string>
+    <string name="support_tier_espresso_title">에스프레소 팁</string>
+    <string name="support_tier_espresso_desc">개발자에게 힘을 주는 따뜻한 커피 한 잔</string>
+    <string name="support_tier_supporter_title">FlagCraft 서포터</string>
+    <string name="support_tier_supporter_desc">서버 유지와 꾸준한 업데이트를 지원합니다</string>
+    <string name="support_tier_champion_title">지리학 챔피언</string>
+    <string name="support_tier_champion_desc">인디 개발자를 위한 뜻깊은 후원</string>
+    <string name="support_tier_patron_title">그랜드 패트론</string>
+    <string name="support_tier_patron_desc">최고 등급 배지와 영원한 감사의 마음</string>
+
+    <!-- Rating & Engagement -->
+    <string name="rating_dialog_title">%s이 마음에 드시나요?</string>
+    <string name="rating_dialog_desc">앱이 유용하게 사용되고 있나요?</string>
+    <string name="rating_positive">네, 정말 좋아요! 👍</string>
+    <string name="rating_negative">개선이 필요해요 💬</string>
+
+    <!-- Shake Detection -->
+    <string name="shake_setting_title">흔들기 제스처</string>
+    <string name="shake_setting_desc">기기를 흔들어 동작 실행</string>
+    <string name="shake_sensitivity_label">민감도: %s</string>
+
+    <string name="support_btn_copy">링크 복사</string>
+    <string name="support_btn_open_paypal">PayPal 열기</string>
+    <string name="support_dialog_footnote">🛡️ 개인정보 보호 약속: FlagCraft는 제3자 광고를 표시하지 않으며 개인 데이터를 추적하지 않습니다. 기부는 100% 자발적입니다.</string>
+</resources>

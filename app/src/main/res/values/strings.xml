@@ -1,0 +1,154 @@
+<resources>
+    <!-- Application Platform Identity -->
+    <string name="app_name">FlagCraft</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_cards">Cards</string>
+    <string name="nav_blitz">Blitz</string>
+    <string name="nav_party">TV Party</string>
+    <string name="nav_explorer">Explorer</string>
+    <string name="nav_stats">Stats</string>
+    <string name="btn_back">Back</string>
+    <string name="btn_close">Close</string>
+    <string name="btn_play_again">Play Again</string>
+    <string name="btn_home">Home</string>
+    <string name="btn_search">Search</string>
+    <string name="btn_clear">Clear</string>
+
+    <!-- Home Screen -->
+    <string name="home_tagline">REST Countries API • Living Room TV Showdown</string>
+    <string name="home_supporter_badge">SUPPORTER ⭐</string>
+    <string name="home_support_development">Support Development</string>
+    <string name="home_tv_mode">TV Mode</string>
+    <string name="home_tv_mode_active_title">📺 Android TV Living Room Party Mode Active!</string>
+    <string name="home_ready_title">Ready to master world flags?</string>
+    <string name="home_tv_mode_active_desc">Use Remote D-Pad Colors (Up=Red, Down=Blue, Left=Yellow, Right=Green) for couch multiplayer trivia!</string>
+    <string name="home_ready_desc">Explore %d world countries, test your speed in Blitz, or challenge friends on TV!</string>
+    <string name="home_select_experience">Select Experience</string>
+
+    <!-- Game Modes -->
+    <string name="mode_blitz_title">60-Second Geography Blitz</string>
+    <string name="mode_blitz_subtitle">Speed trivia rounds during daily commutes. Best: %d pts</string>
+    <string name="mode_blitz_subtitle_phone">Fast swipeable speed rounds during daily commutes. High Score: %d pts</string>
+    <string name="mode_party_title">Living Room TV Party Showdown</string>
+    <string name="mode_party_subtitle">Directional D-pad colors (Up, Down, Left, Right) for 1-4 players.</string>
+    <string name="mode_party_subtitle_phone">Turn-based sofa trivia showdown! Directional D-pad colors (Up, Down, Left, Right) with 1-4 players.</string>
+    <string name="mode_flashcards_title">Swipeable Study Flashcards</string>
+    <string name="mode_flashcards_subtitle">Learn capitals, currencies, populations &amp; flags. Track mastery.</string>
+    <string name="mode_flashcards_subtitle_phone">Learn capitals, currencies, populations &amp; flags. Track your mastery level.</string>
+    <string name="mode_explorer_title">World Country Explorer</string>
+    <string name="mode_explorer_subtitle">Browse, filter by continent, search flags &amp; bookmark favorites.</string>
+    <string name="mode_stats_title">Study Stats &amp; History</string>
+    <string name="mode_stats_subtitle">View quiz scores, accuracy percentages, and flashcard mastery.</string>
+
+    <!-- Support Development Card -->
+    <string name="support_card_title">Support Independent Development</string>
+    <string name="support_card_tagline">100% Ad-Free • Zero Trackers • Open Geography</string>
+    <string name="support_card_thank_you">Thank you for being an active FlagCraft supporter! Your contribution helps keep this project free, offline, and up to date.</string>
+    <string name="support_card_desc">FlagCraft is crafted by independent developers without advertisements. Voluntary tips help fund REST API bandwidth, new trivia packs, and TV optimizations.</string>
+    <string name="support_card_btn_active">Manage Support / Tip Again</string>
+    <string name="support_card_btn_donate">Support FlagCraft (Google Play, PayPal, Ko-fi)</string>
+
+    <!-- Flashcards & Study -->
+    <string name="flashcards_title">Study Flashcards</string>
+    <string name="filter_favorites_only">Favorites Only</string>
+    <string name="region_all">All</string>
+    <string name="region_africa">Africa</string>
+    <string name="region_americas">Americas</string>
+    <string name="region_asia">Asia</string>
+    <string name="region_europe">Europe</string>
+    <string name="region_oceania">Oceania</string>
+    <string name="flashcards_empty_title">No flashcards found</string>
+    <string name="flashcards_empty_subtitle">Try changing region filter or bookmarking countries</string>
+    <string name="flashcards_card_counter">Card %1$d of %2$d</string>
+    <string name="flashcards_status_mastered">Mastered</string>
+    <string name="flashcards_status_learning">Learning</string>
+    <string name="flashcards_status_review">Review</string>
+    <string name="flashcard_swipe_hint">Tap to flip • Swipe 👈 Review | Master 👉</string>
+    <string name="flashcard_capital">Capital</string>
+    <string name="flashcard_population">Population</string>
+    <string name="flashcard_currencies">Currencies</string>
+    <string name="flashcard_languages">Languages</string>
+    <string name="flashcard_btn_review">Review</string>
+    <string name="flashcard_btn_mastered">Mastered</string>
+    <string name="flashcard_bookmark">Bookmark Country</string>
+
+    <!-- Blitz Quiz -->
+    <string name="blitz_timer">Timer</string>
+    <string name="blitz_streak_badge">x%d Streak! 🔥</string>
+    <string name="blitz_score_label">%d pts</string>
+    <string name="blitz_times_up">Time\'s Up!</string>
+    <string name="blitz_final_score">Score: %d pts</string>
+    <string name="blitz_stat_answered">Answered</string>
+    <string name="blitz_stat_max_streak">Max Streak</string>
+    <string name="blitz_value_moment_title">🎉 Awesome Round!</string>
+    <string name="blitz_value_moment_desc">FlagCraft is 100% ad-free &amp; indie. If this speed round brightened your day, consider buying the dev a coffee!</string>
+    <string name="blitz_value_moment_later">Maybe later</string>
+    <string name="blitz_value_moment_support">Support ☕</string>
+
+    <!-- Party Mode -->
+    <string name="party_title">Living Room TV Showdown</string>
+    <string name="party_subtitle">Multiplayer D-Pad Flag Quiz for Couch &amp; TV</string>
+    <string name="party_select_players">Select Player Count</string>
+    <string name="party_player_count">%d Player</string>
+    <string name="party_players_count">%d Players</string>
+    <string name="party_how_to_play_title">How to Play on Android TV / Couch</string>
+    <string name="party_how_to_play_desc">Pass the remote or use keyboard/D-pad: Up=Red, Down=Blue, Left=Yellow, Right=Green. Take turns answering before time runs out!</string>
+    <string name="party_btn_start">Start Showdown</string>
+    <string name="party_round_counter">Round %1$d of %2$d</string>
+    <string name="party_current_turn">%s\'s Turn</string>
+    <string name="party_winner_title">🏆 Showdown Champion!</string>
+    <string name="party_winner_subtitle">Congratulations %s!</string>
+    <string name="party_scores_title">Final Standings</string>
+
+    <!-- Country Explorer -->
+    <string name="explorer_title">World Country Explorer</string>
+    <string name="explorer_search_placeholder">Search country, capital, code…</string>
+    <string name="explorer_details_official_name">Official Name</string>
+    <string name="explorer_details_region">Region &amp; Subregion</string>
+    <string name="explorer_details_capital">Capital City</string>
+    <string name="explorer_details_population">Population</string>
+    <string name="explorer_details_currency">Currency</string>
+    <string name="explorer_details_languages">Languages</string>
+    <string name="explorer_details_status">Study Status</string>
+
+    <!-- Stats Screen -->
+    <string name="stats_title">Study Stats &amp; History</string>
+    <string name="stats_blitz_best">Blitz Best</string>
+    <string name="stats_cards_mastered">Mastered Cards</string>
+    <string name="stats_cards_learning">In Progress</string>
+    <string name="stats_cards_overview">Mastery Overview</string>
+    <string name="stats_recent_history">Recent Quiz Sessions</string>
+    <string name="stats_history_empty">No quiz history yet. Play Blitz or TV Party to see your stats!</string>
+
+    <!-- Support Dialog -->
+    <string name="support_dialog_title">Support FlagCraft Development</string>
+    <string name="support_dialog_subtitle">Help keep FlagCraft independent, ad-free, and open geography</string>
+    <string name="support_tab_play">Google Play</string>
+    <string name="support_tab_paypal">PayPal</string>
+    <string name="support_tab_kofi">Ko-fi</string>
+    <string name="support_tier_espresso_title">Espresso Tip</string>
+    <string name="support_tier_espresso_desc">A quick coffee boost for the dev</string>
+    <string name="support_tier_supporter_title">FlagCraft Supporter</string>
+    <string name="support_tier_supporter_desc">Helps keep API servers &amp; updates active</string>
+    <string name="support_tier_champion_title">Geography Champion</string>
+    <string name="support_tier_champion_desc">Generous gift for independent dev</string>
+    <string name="support_tier_patron_title">Grand Patron</string>
+    <string name="support_tier_patron_desc">Ultimate badge &amp; everlasting gratitude</string>
+
+    <!-- Rating & Engagement -->
+    <string name="rating_dialog_title">Enjoying %s?</string>
+    <string name="rating_dialog_desc">Are you finding the app helpful so far?</string>
+    <string name="rating_positive">Yes, loving it! 👍</string>
+    <string name="rating_negative">Needs work 💬</string>
+
+    <!-- Shake Detection -->
+    <string name="shake_setting_title">Shake Gesture</string>
+    <string name="shake_setting_desc">Shake device to trigger action</string>
+    <string name="shake_sensitivity_label">Sensitivity: %s</string>
+
+    <string name="support_btn_copy">Copy Link</string>
+    <string name="support_btn_open_paypal">Open PayPal</string>
+    <string name="support_dialog_footnote">🛡️ Privacy Pledge: FlagCraft does not show third-party ads or track personal data. Donations are 100% voluntary.</string>
+</resources>

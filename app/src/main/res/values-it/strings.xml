@@ -1,0 +1,154 @@
+<resources>
+    <!-- Application Platform Identity -->
+    <string name="app_name">FlagCraft</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_cards">Carte</string>
+    <string name="nav_blitz">Blitz</string>
+    <string name="nav_party">TV Party</string>
+    <string name="nav_explorer">Esplora</string>
+    <string name="nav_stats">Statistiche</string>
+    <string name="btn_back">Indietro</string>
+    <string name="btn_close">Chiudi</string>
+    <string name="btn_play_again">Gioca ancora</string>
+    <string name="btn_home">Home</string>
+    <string name="btn_search">Cerca</string>
+    <string name="btn_clear">Cancella</string>
+
+    <!-- Home Screen -->
+    <string name="home_tagline">API REST Countries • Sfida TV in salotto</string>
+    <string name="home_supporter_badge">SOSTENITORE ⭐</string>
+    <string name="home_support_development">Sostieni lo sviluppo</string>
+    <string name="home_tv_mode">Modalità TV</string>
+    <string name="home_tv_mode_active_title">📺 Modalità Party Android TV attiva!</string>
+    <string name="home_ready_title">Pronto a padroneggiare le bandiere del mondo?</string>
+    <string name="home_tv_mode_active_desc">Usa i colori del D-Pad (Su=Rosso, Giù=Blu, Sinistra=Giallo, Destra=Verde) per giocare sul divano con gli amici!</string>
+    <string name="home_ready_desc">Esplora %d paesi, metti alla prova la tua velocità nel Blitz o sfida gli amici in TV!</string>
+    <string name="home_select_experience">Seleziona un\'esperienza</string>
+
+    <!-- Game Modes -->
+    <string name="mode_blitz_title">Blitz Geografico di 60 Secondi</string>
+    <string name="mode_blitz_subtitle">Quiz veloci per i tuoi spostamenti. Record: %d pt</string>
+    <string name="mode_blitz_subtitle_phone">Quiz veloci e scorrevoli per i tuoi viaggi. Record: %d pt</string>
+    <string name="mode_party_title">Sfida di Salotto su Android TV</string>
+    <string name="mode_party_subtitle">Colori direzionali del D-pad (Su, Giù, Sinistra, Destra) per 1-4 giocatori.</string>
+    <string name="mode_party_subtitle_phone">Quiz a turni sul divano! Colori direzionali per 1-4 giocatori.</string>
+    <string name="mode_flashcards_title">Flashcard di Studio Scorrevoli</string>
+    <string name="mode_flashcards_subtitle">Impara capitali, valute, popolazioni e bandiere. Monitora i progressi.</string>
+    <string name="mode_flashcards_subtitle_phone">Impara capitali, valute, popolazioni e bandiere. Segui il tuo livello.</string>
+    <string name="mode_explorer_title">Esploratore dei Paesi del Mondo</string>
+    <string name="mode_explorer_subtitle">Sfoglia, filtra per continente, cerca bandiere e salva i preferiti.</string>
+    <string name="mode_stats_title">Statistiche e Cronologia</string>
+    <string name="mode_stats_subtitle">Visualizza punteggi, percentuali di precisione e carte padroneggiate.</string>
+
+    <!-- Support Development Card -->
+    <string name="support_card_title">Sostieni lo sviluppo indipendente</string>
+    <string name="support_card_tagline">100% Senza Pubblicità • Zero Tracker • Geografia Aperta</string>
+    <string name="support_card_thank_you">Grazie per sostenere attivamente FlagCraft! Il tuo contributo aiuta a mantenere l\'app gratuita, offline e aggiornata.</string>
+    <string name="support_card_desc">FlagCraft è sviluppato in modo indipendente senza annunci. Le donazioni volontarie finanziano i server, nuovi quiz e le ottimizzazioni per la TV.</string>
+    <string name="support_card_btn_active">Gestisci supporto / Dona ancora</string>
+    <string name="support_card_btn_donate">Sostieni FlagCraft (Google Play, PayPal, Ko-fi)</string>
+
+    <!-- Flashcards & Study -->
+    <string name="flashcards_title">Flashcard di studio</string>
+    <string name="filter_favorites_only">Solo preferiti</string>
+    <string name="region_all">Tutti</string>
+    <string name="region_africa">Africa</string>
+    <string name="region_americas">Americhe</string>
+    <string name="region_asia">Asia</string>
+    <string name="region_europe">Europa</string>
+    <string name="region_oceania">Oceania</string>
+    <string name="flashcards_empty_title">Nessuna flashcard trovata</string>
+    <string name="flashcards_empty_subtitle">Prova a cambiare il filtro per regione o ad aggiungere paesi ai preferiti</string>
+    <string name="flashcards_card_counter">Carta %1$d di %2$d</string>
+    <string name="flashcards_status_mastered">Padroneggiata</string>
+    <string name="flashcards_status_learning">In corso</string>
+    <string name="flashcards_status_review">Da ripassare</string>
+    <string name="flashcard_swipe_hint">Tocca per girare • Scorri 👈 Ripassa | Padroneggiata 👉</string>
+    <string name="flashcard_capital">Capitale</string>
+    <string name="flashcard_population">Popolazione</string>
+    <string name="flashcard_currencies">Valute</string>
+    <string name="flashcard_languages">Lingue</string>
+    <string name="flashcard_btn_review">Ripassa</string>
+    <string name="flashcard_btn_mastered">Padroneggiata</string>
+    <string name="flashcard_bookmark">Aggiungi ai preferiti</string>
+
+    <!-- Blitz Quiz -->
+    <string name="blitz_timer">Timer</string>
+    <string name="blitz_streak_badge">x%d Serie! 🔥</string>
+    <string name="blitz_score_label">%d pt</string>
+    <string name="blitz_times_up">Tempo Scaduto!</string>
+    <string name="blitz_final_score">Punteggio: %d pt</string>
+    <string name="blitz_stat_answered">Risposte</string>
+    <string name="blitz_stat_max_streak">Serie massima</string>
+    <string name="blitz_value_moment_title">🎉 Ottima partita!</string>
+    <string name="blitz_value_moment_desc">FlagCraft è indipendente e 100% privo di pubblicità. Se ti sei divertito, offri un caffè allo sviluppatore!</string>
+    <string name="blitz_value_moment_later">Più tardi</string>
+    <string name="blitz_value_moment_support">Offri un caffè ☕</string>
+
+    <!-- Party Mode -->
+    <string name="party_title">Sfida di Salotto su Android TV</string>
+    <string name="party_subtitle">Quiz multigiocatore con telecomando per TV e divano</string>
+    <string name="party_select_players">Seleziona numero di giocatori</string>
+    <string name="party_player_count">%d Giocatore</string>
+    <string name="party_players_count">%d Giocatori</string>
+    <string name="party_how_to_play_title">Come giocare su Android TV / Divano</string>
+    <string name="party_how_to_play_desc">Passa il telecomando o usa la tastiera: Su=Rosso, Giù=Blu, Sinistra=Giallo, Destra=Verde. Rispondete a turno prima dello scadere del tempo!</string>
+    <string name="party_btn_start">Inizia la sfida</string>
+    <string name="party_round_counter">Round %1$d di %2$d</string>
+    <string name="party_current_turn">Turno di %s</string>
+    <string name="party_winner_title">🏆 Campione della sfida!</string>
+    <string name="party_winner_subtitle">Congratulazioni %s!</string>
+    <string name="party_scores_title">Classifica Finale</string>
+
+    <!-- Country Explorer -->
+    <string name="explorer_title">Esploratore dei Paesi del Mondo</string>
+    <string name="explorer_search_placeholder">Cerca paese, capitale, codice…</string>
+    <string name="explorer_details_official_name">Nome ufficiale</string>
+    <string name="explorer_details_region">Regione e sottoregione</string>
+    <string name="explorer_details_capital">Capitale</string>
+    <string name="explorer_details_population">Popolazione</string>
+    <string name="explorer_details_currency">Valuta</string>
+    <string name="explorer_details_languages">Lingue</string>
+    <string name="explorer_details_status">Stato di studio</string>
+
+    <!-- Stats Screen -->
+    <string name="stats_title">Statistiche e Cronologia</string>
+    <string name="stats_blitz_best">Miglior Blitz</string>
+    <string name="stats_cards_mastered">Carte padroneggiate</string>
+    <string name="stats_cards_learning">In corso</string>
+    <string name="stats_cards_overview">Panoramica apprendimento</string>
+    <string name="stats_recent_history">Sessioni di quiz recenti</string>
+    <string name="stats_history_empty">Nessuna cronologia. Gioca a Blitz o TV Party per vedere le tue statistiche!</string>
+
+    <!-- Support Dialog -->
+    <string name="support_dialog_title">Sostieni lo sviluppo di FlagCraft</string>
+    <string name="support_dialog_subtitle">Aiutaci a mantenere FlagCraft indipendente, senza pubblicità e gratuito</string>
+    <string name="support_tab_play">Google Play</string>
+    <string name="support_tab_paypal">PayPal</string>
+    <string name="support_tab_kofi">Ko-fi</string>
+    <string name="support_tier_espresso_title">Caffè Espresso</string>
+    <string name="support_tier_espresso_desc">Una ricarica veloce di caffeina per lo sviluppatore</string>
+    <string name="support_tier_supporter_title">Sostenitore FlagCraft</string>
+    <string name="support_tier_supporter_desc">Aiuta a mantenere attivi server e aggiornamenti</string>
+    <string name="support_tier_champion_title">Campione di Geografia</string>
+    <string name="support_tier_champion_desc">Donazione generosa per lo sviluppo indipendente</string>
+    <string name="support_tier_patron_title">Gran Mecenate</string>
+    <string name="support_tier_patron_desc">Distintivo supremo ed eterna gratitudine</string>
+
+    <!-- Rating & Engagement -->
+    <string name="rating_dialog_title">Ti piace %s?</string>
+    <string name="rating_dialog_desc">Trovi utile l\'applicazione finora?</string>
+    <string name="rating_positive">Sì, fantastica! 👍</string>
+    <string name="rating_negative">Da migliorare 💬</string>
+
+    <!-- Shake Detection -->
+    <string name="shake_setting_title">Gesto di scuotimento</string>
+    <string name="shake_setting_desc">Scuoti il dispositivo per avviare l\'azione</string>
+    <string name="shake_sensitivity_label">Sensibilità: %s</string>
+
+    <string name="support_btn_copy">Copia link</string>
+    <string name="support_btn_open_paypal">Apri PayPal</string>
+    <string name="support_dialog_footnote">🛡️ Impegno per la privacy: FlagCraft non mostra annunci di terze parti né traccia dati personali. Le donazioni sono volontarie al 100%.</string>
+</resources>

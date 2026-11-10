@@ -1,0 +1,6 @@
+{
+  "name": "FlagCraft",
+  "description": "Master world flags & geography with swipeable flashcards, 60-second Blitz trivia, and living room Android TV Party Showdown with D-pad color controls!",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

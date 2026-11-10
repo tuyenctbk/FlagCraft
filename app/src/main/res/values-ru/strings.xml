@@ -1,0 +1,154 @@
+<resources>
+    <!-- Application Platform Identity -->
+    <string name="app_name">FlagCraft</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Главная</string>
+    <string name="nav_cards">Карточки</string>
+    <string name="nav_blitz">Блиц</string>
+    <string name="nav_party">ТВ-вечеринка</string>
+    <string name="nav_explorer">Обзор</string>
+    <string name="nav_stats">Статистика</string>
+    <string name="btn_back">Назад</string>
+    <string name="btn_close">Закрыть</string>
+    <string name="btn_play_again">Сыграть снова</string>
+    <string name="btn_home">Главная</string>
+    <string name="btn_search">Поиск</string>
+    <string name="btn_clear">Очистить</string>
+
+    <!-- Home Screen -->
+    <string name="home_tagline">API REST Countries • Викторина на телевизоре</string>
+    <string name="home_supporter_badge">СПОНСОР ⭐</string>
+    <string name="home_support_development">Поддержать автора</string>
+    <string name="home_tv_mode">Режим ТВ</string>
+    <string name="home_tv_mode_active_title">📺 Режим вечеринки Android TV активен!</string>
+    <string name="home_ready_title">Готовы выучить флаги всех стран мира?</string>
+    <string name="home_tv_mode_active_desc">Используйте цветные кнопки пульта (Вверх=Красный, Вниз=Синий, Влево=Желтый, Вправо=Зеленый) для игры на диване!</string>
+    <string name="home_ready_desc">Изучите %d стран, проверьте скорость в Блице или бросьте вызов друзьям на ТВ!</string>
+    <string name="home_select_experience">Выберите режим</string>
+
+    <!-- Game Modes -->
+    <string name="mode_blitz_title">60-секундный блиц по географии</string>
+    <string name="mode_blitz_subtitle">Быстрые раунды викторины в дороге. Рекорд: %d очков</string>
+    <string name="mode_blitz_subtitle_phone">Быстрые раунды со свайпами. Рекорд: %d очков</string>
+    <string name="mode_party_title">ТВ-битва в гостиной</string>
+    <string name="mode_party_subtitle">Цветные направления пульта (Вверх, Вниз, Влево, Вправо) для 1-4 игроков.</string>
+    <string name="mode_party_subtitle_phone">Пошаговая викторина на диване! Цветные кнопки для 1-4 игроков.</string>
+    <string name="mode_flashcards_title">Обучающие карточки со свайпами</string>
+    <string name="mode_flashcards_subtitle">Изучайте столицы, валюты, население и флаги. Отслеживайте прогресс.</string>
+    <string name="mode_flashcards_subtitle_phone">Изучайте столицы, валюты, население и флаги. Проверяйте уровень знаний.</string>
+    <string name="mode_explorer_title">Энциклопедия стран мира</string>
+    <string name="mode_explorer_subtitle">Фильтрация по континентам, поиск флагов и добавление в избранное.</string>
+    <string name="mode_stats_title">Статистика и история</string>
+    <string name="mode_stats_subtitle">Просматривайте баллы, точность ответов и изученные карточки.</string>
+
+    <!-- Support Development Card -->
+    <string name="support_card_title">Поддержка независимой разработки</string>
+    <string name="support_card_tagline">100% Без рекламы • Без трекеров • Открытые данные</string>
+    <string name="support_card_thank_you">Спасибо за поддержку FlagCraft! Ваш вклад помогает сохранять проект бесплатным, офлайн и актуальным.</string>
+    <string name="support_card_desc">FlagCraft создан независимыми разработчиками без рекламы. Добровольные чаевые идут на поддержку серверов, новые вопросы и оптимизацию для ТВ.</string>
+    <string name="support_card_btn_active">Управление поддержкой / Отправить чаевые</string>
+    <string name="support_card_btn_donate">Поддержать FlagCraft (Google Play, PayPal, Ko-fi)</string>
+
+    <!-- Flashcards & Study -->
+    <string name="flashcards_title">Обучающие карточки</string>
+    <string name="filter_favorites_only">Только избранное</string>
+    <string name="region_all">Все</string>
+    <string name="region_africa">Африка</string>
+    <string name="region_americas">Америка</string>
+    <string name="region_asia">Азия</string>
+    <string name="region_europe">Европа</string>
+    <string name="region_oceania">Океания</string>
+    <string name="flashcards_empty_title">Карточки не найдены</string>
+    <string name="flashcards_empty_subtitle">Попробуйте изменить фильтр региона или добавить страны в избранное</string>
+    <string name="flashcards_card_counter">Карточка %1$d из %2$d</string>
+    <string name="flashcards_status_mastered">Выучено</string>
+    <string name="flashcards_status_learning">В процессе</string>
+    <string name="flashcards_status_review">Повторить</string>
+    <string name="flashcard_swipe_hint">Нажмите, чтобы перевернуть • Свайп 👈 Повторить | Выучено 👉</string>
+    <string name="flashcard_capital">Столица</string>
+    <string name="flashcard_population">Население</string>
+    <string name="flashcard_currencies">Валюта</string>
+    <string name="flashcard_languages">Языки</string>
+    <string name="flashcard_btn_review">Повторить</string>
+    <string name="flashcard_btn_mastered">Выучено</string>
+    <string name="flashcard_bookmark">В избранное</string>
+
+    <!-- Blitz Quiz -->
+    <string name="blitz_timer">Таймер</string>
+    <string name="blitz_streak_badge">Серия x%d! 🔥</string>
+    <string name="blitz_score_label">%d очков</string>
+    <string name="blitz_times_up">Время вышло!</string>
+    <string name="blitz_final_score">Итог: %d очков</string>
+    <string name="blitz_stat_answered">Ответов</string>
+    <string name="blitz_stat_max_streak">Лучшая серия</string>
+    <string name="blitz_value_moment_title">🎉 Отличный раунд!</string>
+    <string name="blitz_value_moment_desc">FlagCraft полностью бесплатен и не содержит рекламы. Если игра подняла вам настроение, угостите разработчика кофе!</string>
+    <string name="blitz_value_moment_later">Позже</string>
+    <string name="blitz_value_moment_support">Угостить кофе ☕</string>
+
+    <!-- Party Mode -->
+    <string name="party_title">ТВ-битва в гостиной</string>
+    <string name="party_subtitle">Викторина по флагам для компании с пультом у телевизора</string>
+    <string name="party_select_players">Количество игроков</string>
+    <string name="party_player_count">%d игрок</string>
+    <string name="party_players_count">%d игроков</string>
+    <string name="party_how_to_play_title">Как играть на Android TV / диване</string>
+    <string name="party_how_to_play_desc">Передавайте пульт или используйте клавиатуру: Вверх=Красный, Вниз=Синий, Влево=Желтый, Вправо=Зеленый. Отвечайте по очереди, пока не вышло время!</string>
+    <string name="party_btn_start">Начать битву</string>
+    <string name="party_round_counter">Раунд %1$d из %2$d</string>
+    <string name="party_current_turn">Ход игрока %s</string>
+    <string name="party_winner_title">🏆 Победитель викторины!</string>
+    <string name="party_winner_subtitle">Поздравляем, %s!</string>
+    <string name="party_scores_title">Итоговая таблица</string>
+
+    <!-- Country Explorer -->
+    <string name="explorer_title">Энциклопедия стран мира</string>
+    <string name="explorer_search_placeholder">Поиск страны, столицы, кода…</string>
+    <string name="explorer_details_official_name">Официальное название</string>
+    <string name="explorer_details_region">Регион и субрегион</string>
+    <string name="explorer_details_capital">Столица</string>
+    <string name="explorer_details_population">Население</string>
+    <string name="explorer_details_currency">Валюта</string>
+    <string name="explorer_details_languages">Языки</string>
+    <string name="explorer_details_status">Статус изучения</string>
+
+    <!-- Stats Screen -->
+    <string name="stats_title">Статистика и история</string>
+    <string name="stats_blitz_best">Рекорд в блице</string>
+    <string name="stats_cards_mastered">Выучено карточек</string>
+    <string name="stats_cards_learning">В процессе</string>
+    <string name="stats_cards_overview">Общий прогресс</string>
+    <string name="stats_recent_history">Недавние игры</string>
+    <string name="stats_history_empty">История пока пуста. Сыграйте в Блиц или ТВ-битву, чтобы увидеть свои результаты!</string>
+
+    <!-- Support Dialog -->
+    <string name="support_dialog_title">Поддержать FlagCraft</string>
+    <string name="support_dialog_subtitle">Помогите сохранить FlagCraft независимым, бесплатным и без рекламы</string>
+    <string name="support_tab_play">Google Play</string>
+    <string name="support_tab_paypal">PayPal</string>
+    <string name="support_tab_kofi">Ko-fi</string>
+    <string name="support_tier_espresso_title">Эспрессо</string>
+    <string name="support_tier_espresso_desc">Бодрящий кофе для разработчика</string>
+    <string name="support_tier_supporter_title">Спонсор FlagCraft</string>
+    <string name="support_tier_supporter_desc">Помощь в оплате серверов и обновлений</string>
+    <string name="support_tier_champion_title">Чемпион географии</string>
+    <string name="support_tier_champion_desc">Щедрый подарок для независимого автора</string>
+    <string name="support_tier_patron_title">Главный меценат</string>
+    <string name="support_tier_patron_desc">Почетный статус и вечная благодарность</string>
+
+    <!-- Rating & Engagement -->
+    <string name="rating_dialog_title">Вам нравится %s?</string>
+    <string name="rating_dialog_desc">Находите ли вы приложение полезным?</string>
+    <string name="rating_positive">Да, очень! 👍</string>
+    <string name="rating_negative">Нужны улучшения 💬</string>
+
+    <!-- Shake Detection -->
+    <string name="shake_setting_title">Жест встряхивания</string>
+    <string name="shake_setting_desc">Встряхните устройство для действия</string>
+    <string name="shake_sensitivity_label">Чувствительность: %s</string>
+
+    <string name="support_btn_copy">Скопировать ссылку</string>
+    <string name="support_btn_open_paypal">Открыть PayPal</string>
+    <string name="support_dialog_footnote">🛡️ Гарантия конфиденциальности: FlagCraft не показывает рекламу и не собирает личные данные. Пожертвования абсолютно добровольны.</string>
+</resources>

@@ -1,0 +1,154 @@
+<resources>
+    <!-- Application Platform Identity -->
+    <string name="app_name">FlagCraft</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Trang chủ</string>
+    <string name="nav_cards">Thẻ học</string>
+    <string name="nav_blitz">Đấu nhanh</string>
+    <string name="nav_party">Tiệc TV</string>
+    <string name="nav_explorer">Khám phá</string>
+    <string name="nav_stats">Thống kê</string>
+    <string name="btn_back">Quay lại</string>
+    <string name="btn_close">Đóng</string>
+    <string name="btn_play_again">Chơi lại</string>
+    <string name="btn_home">Trang chủ</string>
+    <string name="btn_search">Tìm kiếm</string>
+    <string name="btn_clear">Xóa</string>
+
+    <!-- Home Screen -->
+    <string name="home_tagline">API REST Countries • Đấu trí TV phòng khách</string>
+    <string name="home_supporter_badge">NGƯỜI ỦNG HỘ ⭐</string>
+    <string name="home_support_development">Ủng hộ phát triển</string>
+    <string name="home_tv_mode">Chế độ TV</string>
+    <string name="home_tv_mode_active_title">📺 Đang bật chế độ Tiệc Android TV phòng khách!</string>
+    <string name="home_ready_title">Bạn đã sẵn sàng chinh phục cờ các quốc gia?</string>
+    <string name="home_tv_mode_active_desc">Dùng 4 màu nút điều hướng (Lên=Đỏ, Xuống=Xanh dương, Trái=Vàng, Phải=Xanh lá) để so tài cùng bạn bè trên ghế sofa!</string>
+    <string name="home_ready_desc">Khám phá %d quốc gia, thử thách tốc độ với Đấu nhanh hoặc thi đấu trên TV cùng người thân!</string>
+    <string name="home_select_experience">Chọn chế độ trải nghiệm</string>
+
+    <!-- Game Modes -->
+    <string name="mode_blitz_title">Đấu Nhanh Địa Lý 60 Giây</string>
+    <string name="mode_blitz_subtitle">Các vòng đố nhanh trên đường đi lại hàng ngày. Kỷ lục: %d điểm</string>
+    <string name="mode_blitz_subtitle_phone">Vuốt nhanh trả lời chớp nhoáng. Điểm cao: %d điểm</string>
+    <string name="mode_party_title">Đấu Trí Phòng Khách Android TV</string>
+    <string name="mode_party_subtitle">Điều khiển 4 hướng màu sắc (Lên, Xuống, Trái, Phải) cho 1-4 người chơi.</string>
+    <string name="mode_party_subtitle_phone">Trò chơi đố vui theo lượt trên sofa! Bấm màu điều khiển cho 1-4 người chơi.</string>
+    <string name="mode_flashcards_title">Thẻ Ghi Nhớ Vuốt Chạm</string>
+    <string name="mode_flashcards_subtitle">Học thủ đô, tiền tệ, dân số và quốc kỳ. Theo dõi tiến độ thuần thục.</string>
+    <string name="mode_flashcards_subtitle_phone">Học thủ đô, tiền tệ, dân số và quốc kỳ. Theo dõi cấp độ ghi nhớ.</string>
+    <string name="mode_explorer_title">Khám Phá Quốc Gia Thế Giới</string>
+    <string name="mode_explorer_subtitle">Duyệt theo châu lục, tìm kiếm quốc kỳ và lưu các quốc gia yêu thích.</string>
+    <string name="mode_stats_title">Thống Kê &amp; Lịch Sử Học Tập</string>
+    <string name="mode_stats_subtitle">Xem điểm số, tỷ lệ trả lời đúng và mức độ thuộc thẻ bài.</string>
+
+    <!-- Support Development Card -->
+    <string name="support_card_title">Ủng hộ nhà phát triển độc lập</string>
+    <string name="support_card_tagline">100% Không Quảng Cáo • Không Thu Thập Dữ Liệu • Địa Lý Mở</string>
+    <string name="support_card_thank_you">Cảm ơn bạn đã luôn đồng hành và ủng hộ FlagCraft! Sự đóng góp của bạn giúp ứng dụng luôn miễn phí, hoạt động offline và cập nhật liên tục.</string>
+    <string name="support_card_desc">FlagCraft được tạo bởi lập trình viên độc lập và hoàn toàn không có quảng cáo. Đóng góp tự nguyện giúp duy trì máy chủ, gói câu hỏi và tối ưu hóa TV.</string>
+    <string name="support_card_btn_active">Quản lý ủng hộ / Tiếp tục gửi tip</string>
+    <string name="support_card_btn_donate">Ủng hộ FlagCraft (Google Play, PayPal, Ko-fi)</string>
+
+    <!-- Flashcards & Study -->
+    <string name="flashcards_title">Thẻ ghi nhớ</string>
+    <string name="filter_favorites_only">Chỉ mục yêu thích</string>
+    <string name="region_all">Tất cả</string>
+    <string name="region_africa">Châu Phi</string>
+    <string name="region_americas">Châu Mỹ</string>
+    <string name="region_asia">Châu Á</string>
+    <string name="region_europe">Châu Âu</string>
+    <string name="region_oceania">Châu Đại Dương</string>
+    <string name="flashcards_empty_title">Không tìm thấy thẻ nào</string>
+    <string name="flashcards_empty_subtitle">Hãy thử đổi bộ lọc châu lục hoặc thêm quốc gia vào danh sách yêu thích</string>
+    <string name="flashcards_card_counter">Thẻ %1$d trên %2$d</string>
+    <string name="flashcards_status_mastered">Đã thuộc</string>
+    <string name="flashcards_status_learning">Đang học</string>
+    <string name="flashcards_status_review">Ôn tập</string>
+    <string name="flashcard_swipe_hint">Chạm để lật • Vuốt 👈 Ôn lại | Đã thuộc 👉</string>
+    <string name="flashcard_capital">Thủ đô</string>
+    <string name="flashcard_population">Dân số</string>
+    <string name="flashcard_currencies">Tiền tệ</string>
+    <string name="flashcard_languages">Ngôn ngữ</string>
+    <string name="flashcard_btn_review">Ôn tập</string>
+    <string name="flashcard_btn_mastered">Đã thuộc</string>
+    <string name="flashcard_bookmark">Lưu quốc gia yêu thích</string>
+
+    <!-- Blitz Quiz -->
+    <string name="blitz_timer">Thời gian</string>
+    <string name="blitz_streak_badge">Chuỗi x%d! 🔥</string>
+    <string name="blitz_score_label">%d điểm</string>
+    <string name="blitz_times_up">Hết giờ!</string>
+    <string name="blitz_final_score">Điểm số: %d điểm</string>
+    <string name="blitz_stat_answered">Đã trả lời</string>
+    <string name="blitz_stat_max_streak">Chuỗi dài nhất</string>
+    <string name="blitz_value_moment_title">🎉 Vòng chơi tuyệt vời!</string>
+    <string name="blitz_value_moment_desc">FlagCraft hoàn toàn miễn phí và không có quảng cáo. Nếu vòng chơi này mang lại niềm vui cho bạn, hãy mời tác giả một ly cà phê nhé!</string>
+    <string name="blitz_value_moment_later">Để sau</string>
+    <string name="blitz_value_moment_support">Mời cà phê ☕</string>
+
+    <!-- Party Mode -->
+    <string name="party_title">Đấu Trí Phòng Khách Android TV</string>
+    <string name="party_subtitle">Trò chơi đố vui quốc kỳ nhiều người chơi trên TV &amp; ghế sofa</string>
+    <string name="party_select_players">Chọn số lượng người chơi</string>
+    <string name="party_player_count">%d Người chơi</string>
+    <string name="party_players_count">%d Người chơi</string>
+    <string name="party_how_to_play_title">Cách chơi trên Android TV / Phòng khách</string>
+    <string name="party_how_to_play_desc">Chuyền remote hoặc dùng bàn phím: Lên=Đỏ, Xuống=Xanh dương, Trái=Vàng, Phải=Xanh lá. Lần lượt trả lời trước khi hết thời gian!</string>
+    <string name="party_btn_start">Bắt đầu thi đấu</string>
+    <string name="party_round_counter">Vòng %1$d trên %2$d</string>
+    <string name="party_current_turn">Lượt của %s</string>
+    <string name="party_winner_title">🏆 Nhà vô địch!</string>
+    <string name="party_winner_subtitle">Chúc mừng %s!</string>
+    <string name="party_scores_title">Bảng xếp hạng chung cuộc</string>
+
+    <!-- Country Explorer -->
+    <string name="explorer_title">Khám Phá Quốc Gia Thế Giới</string>
+    <string name="explorer_search_placeholder">Tìm tên nước, thủ đô, mã quốc gia…</string>
+    <string name="explorer_details_official_name">Tên chính thức</string>
+    <string name="explorer_details_region">Khu vực &amp; Tiểu vùng</string>
+    <string name="explorer_details_capital">Thủ đô</string>
+    <string name="explorer_details_population">Dân số</string>
+    <string name="explorer_details_currency">Tiền tệ</string>
+    <string name="explorer_details_languages">Ngôn ngữ</string>
+    <string name="explorer_details_status">Trạng thái ghi nhớ</string>
+
+    <!-- Stats Screen -->
+    <string name="stats_title">Thống Kê &amp; Lịch Sử Học</string>
+    <string name="stats_blitz_best">Điểm Đấu Nhanh cao nhất</string>
+    <string name="stats_cards_mastered">Thẻ đã ghi nhớ</string>
+    <string name="stats_cards_learning">Đang ôn luyện</string>
+    <string name="stats_cards_overview">Tổng quan tiến độ</string>
+    <string name="stats_recent_history">Các phiên chơi gần đây</string>
+    <string name="stats_history_empty">Chưa có lịch sử chơi. Hãy thử ngay Đấu Nhanh hoặc Tiệc TV để xem thống kê!</string>
+
+    <!-- Support Dialog -->
+    <string name="support_dialog_title">Ủng hộ phát triển FlagCraft</string>
+    <string name="support_dialog_subtitle">Chung tay giữ gìn FlagCraft độc lập, không quảng cáo và miễn phí cho mọi người</string>
+    <string name="support_tab_play">Google Play</string>
+    <string name="support_tab_paypal">PayPal</string>
+    <string name="support_tab_kofi">Ko-fi</string>
+    <string name="support_tier_espresso_title">Một ly Espresso</string>
+    <string name="support_tier_espresso_desc">Tiếp thêm năng lượng cà phê cho lập trình viên</string>
+    <string name="support_tier_supporter_title">Người đồng hành FlagCraft</string>
+    <string name="support_tier_supporter_desc">Duy trì máy chủ và phát triển các bản cập nhật</string>
+    <string name="support_tier_champion_title">Nhà vô địch Địa lý</string>
+    <string name="support_tier_champion_desc">Món quà ý nghĩa dành cho nhà phát triển độc lập</string>
+    <string name="support_tier_patron_title">Nhà tài trợ vàng</string>
+    <string name="support_tier_patron_desc">Huy hiệu danh dự cùng sự tri ân sâu sắc</string>
+
+    <!-- Rating & Engagement -->
+    <string name="rating_dialog_title">Bạn có thích %s không?</string>
+    <string name="rating_dialog_desc">Ứng dụng có mang lại hữu ích cho bạn không?</string>
+    <string name="rating_positive">Rất thích! 👍</string>
+    <string name="rating_negative">Cần cải thiện 💬</string>
+
+    <!-- Shake Detection -->
+    <string name="shake_setting_title">Cử chỉ lắc</string>
+    <string name="shake_setting_desc">Lắc thiết bị để kích hoạt hành động</string>
+    <string name="shake_sensitivity_label">Độ nhạy: %s</string>
+
+    <string name="support_btn_copy">Sao chép liên kết</string>
+    <string name="support_btn_open_paypal">Mở PayPal</string>
+    <string name="support_dialog_footnote">🛡️ Cam kết quyền riêng tư: FlagCraft không hiển thị quảng cáo của bên thứ ba hoặc theo dõi dữ liệu cá nhân. Đóng góp là hoàn toàn tự nguyện.</string>
+</resources>

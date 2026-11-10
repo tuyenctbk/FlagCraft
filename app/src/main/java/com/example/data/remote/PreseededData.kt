@@ -1,0 +1,53 @@
+package com.example.data.remote
+
+import com.example.data.local.CountryEntity
+
+object PreseededData {
+    val defaultCountries = listOf(
+        CountryEntity("USA", "US", "United States", "United States of America", "Washington, D.C.", "Americas", "North America", 331893745, "https://flagcdn.com/w320/us.png", "https://flagcdn.com/us.svg", "Flag of United States", "USD ($)", "English"),
+        CountryEntity("CAN", "CA", "Canada", "Canada", "Ottawa", "Americas", "North America", 38005238, "https://flagcdn.com/w320/ca.png", "https://flagcdn.com/ca.svg", "Flag of Canada", "CAD ($)", "English, French"),
+        CountryEntity("MEX", "MX", "Mexico", "United Mexican States", "Mexico City", "Americas", "North America", 128932753, "https://flagcdn.com/w320/mx.png", "https://flagcdn.com/mx.svg", "Flag of Mexico", "MXN ($)", "Spanish"),
+        CountryEntity("BRA", "BR", "Brazil", "Federative Republic of Brazil", "Brasília", "Americas", "South America", 212559417, "https://flagcdn.com/w320/br.png", "https://flagcdn.com/br.svg", "Flag of Brazil", "BRL (R$)", "Portuguese"),
+        CountryEntity("ARG", "AR", "Argentina", "Argentine Republic", "Buenos Aires", "Americas", "South America", 45376763, "https://flagcdn.com/w320/ar.png", "https://flagcdn.com/ar.svg", "Flag of Argentina", "ARS ($)", "Spanish"),
+        CountryEntity("GBR", "GB", "United Kingdom", "United Kingdom of Great Britain and Northern Ireland", "London", "Europe", "Northern Europe", 67215293, "https://flagcdn.com/w320/gb.png", "https://flagcdn.com/gb.svg", "Flag of United Kingdom", "GBP (£)", "English"),
+        CountryEntity("FRA", "FR", "France", "French Republic", "Paris", "Europe", "Western Europe", 67391582, "https://flagcdn.com/w320/fr.png", "https://flagcdn.com/fr.svg", "Flag of France", "EUR (€)", "French"),
+        CountryEntity("DEU", "DE", "Germany", "Federal Republic of Germany", "Berlin", "Europe", "Western Europe", 83240525, "https://flagcdn.com/w320/de.png", "https://flagcdn.com/de.svg", "Flag of Germany", "EUR (€)", "German"),
+        CountryEntity("ITA", "IT", "Italy", "Italian Republic", "Rome", "Europe", "Southern Europe", 59554023, "https://flagcdn.com/w320/it.png", "https://flagcdn.com/it.svg", "Flag of Italy", "EUR (€)", "Italian"),
+        CountryEntity("ESP", "ES", "Spain", "Kingdom of Spain", "Madrid", "Europe", "Southern Europe", 47351567, "https://flagcdn.com/w320/es.png", "https://flagcdn.com/es.svg", "Flag of Spain", "EUR (€)", "Spanish"),
+        CountryEntity("JPN", "JP", "Japan", "Japan", "Tokyo", "Asia", "Eastern Asia", 125836021, "https://flagcdn.com/w320/jp.png", "https://flagcdn.com/jp.svg", "Flag of Japan", "JPY (¥)", "Japanese"),
+        CountryEntity("KOR", "KR", "South Korea", "Republic of Korea", "Seoul", "Asia", "Eastern Asia", 51780579, "https://flagcdn.com/w320/kr.png", "https://flagcdn.com/kr.svg", "Flag of South Korea", "KRW (₩)", "Korean"),
+        CountryEntity("CHN", "CN", "China", "People's Republic of China", "Beijing", "Asia", "Eastern Asia", 1411778724, "https://flagcdn.com/w320/cn.png", "https://flagcdn.com/cn.svg", "Flag of China", "CNY (¥)", "Mandarin"),
+        CountryEntity("IND", "IN", "India", "Republic of India", "New Delhi", "Asia", "Southern Asia", 1380004385, "https://flagcdn.com/w320/in.png", "https://flagcdn.com/in.svg", "Flag of India", "INR (₹)", "Hindi, English"),
+        CountryEntity("AUS", "AU", "Australia", "Commonwealth of Australia", "Canberra", "Oceania", "Australia and New Zealand", 25687041, "https://flagcdn.com/w320/au.png", "https://flagcdn.com/au.svg", "Flag of Australia", "AUD ($)", "English"),
+        CountryEntity("NZL", "NZ", "New Zealand", "New Zealand", "Wellington", "Oceania", "Australia and New Zealand", 5084300, "https://flagcdn.com/w320/nz.png", "https://flagcdn.com/nz.svg", "Flag of New Zealand", "NZD ($)", "English, Māori"),
+        CountryEntity("EGY", "EG", "Egypt", "Arab Republic of Egypt", "Cairo", "Africa", "Northern Africa", 102334404, "https://flagcdn.com/w320/eg.png", "https://flagcdn.com/eg.svg", "Flag of Egypt", "EGP (£)", "Arabic"),
+        CountryEntity("ZAF", "ZA", "South Africa", "Republic of South Africa", "Pretoria", "Africa", "Southern Africa", 59308690, "https://flagcdn.com/w320/za.png", "https://flagcdn.com/za.svg", "Flag of South Africa", "ZAR (R)", "Zulu, Xhosa, Afrikaans, English"),
+        CountryEntity("NGA", "NG", "Nigeria", "Federal Republic of Nigeria", "Abuja", "Africa", "Western Africa", 206139589, "https://flagcdn.com/w320/ng.png", "https://flagcdn.com/ng.svg", "Flag of Nigeria", "NGN (₦)", "English"),
+        CountryEntity("KEN", "KE", "Kenya", "Republic of Kenya", "Nairobi", "Africa", "Eastern Africa", 53771296, "https://flagcdn.com/w320/ke.png", "https://flagcdn.com/ke.svg", "Flag of Kenya", "KES (KSh)", "Swahili, English"),
+        CountryEntity("SWE", "SE", "Sweden", "Kingdom of Sweden", "Stockholm", "Europe", "Northern Europe", 10353442, "https://flagcdn.com/w320/se.png", "https://flagcdn.com/se.svg", "Flag of Sweden", "SEK (kr)", "Swedish"),
+        CountryEntity("NOR", "NO", "Norway", "Kingdom of Norway", "Oslo", "Europe", "Northern Europe", 5379475, "https://flagcdn.com/w320/no.png", "https://flagcdn.com/no.svg", "Flag of Norway", "NOK (kr)", "Norwegian"),
+        CountryEntity("FIN", "FI", "Finland", "Republic of Finland", "Helsinki", "Europe", "Northern Europe", 5530719, "https://flagcdn.com/w320/fi.png", "https://flagcdn.com/fi.svg", "Flag of Finland", "EUR (€)", "Finnish, Swedish"),
+        CountryEntity("CHE", "CH", "Switzerland", "Swiss Confederation", "Bern", "Europe", "Western Europe", 8636896, "https://flagcdn.com/w320/ch.png", "https://flagcdn.com/ch.svg", "Flag of Switzerland", "CHF (CHf)", "German, French, Italian"),
+        CountryEntity("NLD", "NL", "Netherlands", "Kingdom of the Netherlands", "Amsterdam", "Europe", "Western Europe", 17441139, "https://flagcdn.com/w320/nl.png", "https://flagcdn.com/nl.svg", "Flag of Netherlands", "EUR (€)", "Dutch"),
+        CountryEntity("GRC", "GR", "Greece", "Hellenic Republic", "Athens", "Europe", "Southern Europe", 10715549, "https://flagcdn.com/w320/gr.png", "https://flagcdn.com/gr.svg", "Flag of Greece", "EUR (€)", "Greek"),
+        CountryEntity("TUR", "TR", "Turkey", "Republic of Türkiye", "Ankara", "Asia", "Western Asia", 84339067, "https://flagcdn.com/w320/tr.png", "https://flagcdn.com/tr.svg", "Flag of Turkey", "TRY (₺)", "Turkish"),
+        CountryEntity("VNM", "VN", "Vietnam", "Socialist Republic of Vietnam", "Hanoi", "Asia", "South-Eastern Asia", 97338579, "https://flagcdn.com/w320/vn.png", "https://flagcdn.com/vn.svg", "Flag of Vietnam", "VND (₫)", "Vietnamese"),
+        CountryEntity("THA", "TH", "Thailand", "Kingdom of Thailand", "Bangkok", "Asia", "South-Eastern Asia", 69799978, "https://flagcdn.com/w320/th.png", "https://flagcdn.com/th.svg", "Flag of Thailand", "THB (฿)", "Thai"),
+        CountryEntity("IDN", "ID", "Indonesia", "Republic of Indonesia", "Jakarta", "Asia", "South-Eastern Asia", 273523615, "https://flagcdn.com/w320/id.png", "https://flagcdn.com/id.svg", "Flag of Indonesia", "IDR (Rp)", "Indonesian"),
+        CountryEntity("MYS", "MY", "Malaysia", "Malaysia", "Kuala Lumpur", "Asia", "South-Eastern Asia", 32365999, "https://flagcdn.com/w320/my.png", "https://flagcdn.com/my.svg", "Flag of Malaysia", "MYR (RM)", "Malaysian"),
+        CountryEntity("PHL", "PH", "Philippines", "Republic of the Philippines", "Manila", "Asia", "South-Eastern Asia", 109581078, "https://flagcdn.com/w320/ph.png", "https://flagcdn.com/ph.svg", "Flag of Philippines", "PHP (₱)", "Filipino, English"),
+        CountryEntity("SGP", "SG", "Singapore", "Republic of Singapore", "Singapore", "Asia", "South-Eastern Asia", 5685807, "https://flagcdn.com/w320/sg.png", "https://flagcdn.com/sg.svg", "Flag of Singapore", "SGD ($)", "English, Malay, Mandarin, Tamil"),
+        CountryEntity("IRL", "IE", "Ireland", "Republic of Ireland", "Dublin", "Europe", "Northern Europe", 4994724, "https://flagcdn.com/w320/ie.png", "https://flagcdn.com/ie.svg", "Flag of Ireland", "EUR (€)", "Irish, English"),
+        CountryEntity("PRT", "PT", "Portugal", "Portuguese Republic", "Lisbon", "Europe", "Southern Europe", 10305564, "https://flagcdn.com/w320/pt.png", "https://flagcdn.com/pt.svg", "Flag of Portugal", "EUR (€)", "Portuguese"),
+        CountryEntity("BEL", "BE", "Belgium", "Kingdom of Belgium", "Brussels", "Europe", "Western Europe", 11555997, "https://flagcdn.com/w320/be.png", "https://flagcdn.com/be.svg", "Flag of Belgium", "EUR (€)", "Dutch, French, German"),
+        CountryEntity("AUT", "AT", "Austria", "Republic of Austria", "Vienna", "Europe", "Western Europe", 8917205, "https://flagcdn.com/w320/at.png", "https://flagcdn.com/at.svg", "Flag of Austria", "EUR (€)", "German"),
+        CountryEntity("POL", "PL", "Poland", "Republic of Poland", "Warsaw", "Europe", "Central Europe", 37958138, "https://flagcdn.com/w320/pl.png", "https://flagcdn.com/pl.svg", "Flag of Poland", "PLN (zł)", "Polish"),
+        CountryEntity("DNK", "DK", "Denmark", "Kingdom of Denmark", "Copenhagen", "Europe", "Northern Europe", 5831404, "https://flagcdn.com/w320/dk.png", "https://flagcdn.com/dk.svg", "Flag of Denmark", "DKK (kr)", "Danish"),
+        CountryEntity("CHL", "CL", "Chile", "Republic of Chile", "Santiago", "Americas", "South America", 19116201, "https://flagcdn.com/w320/cl.png", "https://flagcdn.com/cl.svg", "Flag of Chile", "CLP ($)", "Spanish"),
+        CountryEntity("COL", "CO", "Colombia", "Republic of Colombia", "Bogotá", "Americas", "South America", 50882891, "https://flagcdn.com/w320/co.png", "https://flagcdn.com/co.svg", "Flag of Colombia", "COP ($)", "Spanish"),
+        CountryEntity("PER", "PE", "Peru", "Republic of Peru", "Lima", "Americas", "South America", 32971854, "https://flagcdn.com/w320/pe.png", "https://flagcdn.com/pe.svg", "Flag of Peru", "PEN (S/.)", "Spanish"),
+        CountryEntity("MAR", "MA", "Morocco", "Kingdom of Morocco", "Rabat", "Africa", "Northern Africa", 36910560, "https://flagcdn.com/w320/ma.png", "https://flagcdn.com/ma.svg", "Flag of Morocco", "MAD (MAD)", "Arabic, Berber"),
+        CountryEntity("ISL", "IS", "Iceland", "Iceland", "Reykjavík", "Europe", "Northern Europe", 366425, "https://flagcdn.com/w320/is.png", "https://flagcdn.com/is.svg", "Flag of Iceland", "ISK (kr)", "Icelandic"),
+        CountryEntity("JAM", "JM", "Jamaica", "Jamaica", "Kingston", "Americas", "Caribbean", 2961167, "https://flagcdn.com/w320/jm.png", "https://flagcdn.com/jm.svg", "Flag of Jamaica", "JMD ($)", "English")
+    )
+}
