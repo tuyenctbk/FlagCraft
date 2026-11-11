@@ -105,8 +105,14 @@ class CountryRepository(
         countryDao.updateMasteryLevel(code, level)
     }
 
-    suspend fun saveQuizHistory(mode: String, score: Int, total: Int) = withContext(Dispatchers.IO) {
-        val percentage = if (total > 0) (score * 100) / total else 0
+    suspend fun saveQuizHistory(
+        mode: String,
+        score: Int,
+        total: Int,
+        correctCount: Int? = null
+    ) = withContext(Dispatchers.IO) {
+        val effectiveCorrect = correctCount ?: if (score > total) (score / 100) else score
+        val percentage = if (total > 0) ((effectiveCorrect * 100) / total).coerceIn(0, 100) else 0
         quizHistoryDao.insertHistory(
             QuizHistoryEntity(
                 mode = mode,

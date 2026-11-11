@@ -53,6 +53,7 @@ data class BlitzState(
     val streak: Int = 0,
     val maxStreak: Int = 0,
     val totalAnswered: Int = 0,
+    val correctAnswers: Int = 0,
     val timeLeftSeconds: Int = 60,
     val currentQuestion: QuizQuestion? = null,
     val isGameOver: Boolean = false,
@@ -141,7 +142,24 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _showValueMomentPrompt = MutableStateFlow(false)
     val showValueMomentPrompt: StateFlow<Boolean> = _showValueMomentPrompt.asStateFlow()
 
+    private val _shakeEnabled = MutableStateFlow(prefs.getBoolean("shake_enabled", true))
+    val shakeEnabled: StateFlow<Boolean> = _shakeEnabled.asStateFlow()
+
+    private val _shakeThresholdGForce = MutableStateFlow(prefs.getFloat("shake_threshold_g", 2.5f))
+    val shakeThresholdGForce: StateFlow<Float> = _shakeThresholdGForce.asStateFlow()
+
     private var blitzTimerJob: Job? = null
+
+    fun setShakeEnabled(enabled: Boolean) {
+        _shakeEnabled.value = enabled
+        prefs.edit().putBoolean("shake_enabled", enabled).apply()
+    }
+
+    fun setShakeThresholdGForce(threshold: Float) {
+        val clamped = threshold.coerceIn(1.5f, 4.5f)
+        _shakeThresholdGForce.value = clamped
+        prefs.edit().putFloat("shake_threshold_g", clamped).apply()
+    }
 
     fun openSupportDialog() {
         _isSupportDialogVisible.value = true
@@ -207,8 +225,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun navigateTo(screen: AppScreen) {
+        val previousScreen = _currentScreen.value
         _currentScreen.value = screen
-        if (screen == AppScreen.BLITZ_QUIZ && !_blitzState.value.isRunning && !_blitzState.value.isGameOver) {
+        if (previousScreen == AppScreen.BLITZ_QUIZ && screen != AppScreen.BLITZ_QUIZ) {
+            blitzTimerJob?.cancel()
+            if (_blitzState.value.totalAnswered == 0) {
+                _blitzState.value = BlitzState()
+            }
+        }
+        if (screen == AppScreen.BLITZ_QUIZ && (!_blitzState.value.isRunning || _blitzState.value.isGameOver)) {
             startBlitzGame()
         }
     }
@@ -324,7 +349,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             score = newScore,
             streak = newStreak,
             maxStreak = maxOf(state.maxStreak, newStreak),
-            totalAnswered = state.totalAnswered + 1
+            totalAnswered = state.totalAnswered + 1,
+            correctAnswers = state.correctAnswers + (if (isCorrect) 1 else 0)
         )
 
         viewModelScope.launch {
@@ -350,7 +376,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             repository.saveQuizHistory(
                 mode = "BLITZ",
                 score = finalState.score,
-                total = finalState.totalAnswered
+                total = finalState.totalAnswered,
+                correctCount = finalState.correctAnswers
             )
         }
     }
@@ -425,11 +452,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 isAnswerRevealed = false
             )
             checkValueMomentTrigger()
+            val questionsPerPlayer = (state.totalRounds / state.playerCount.coerceAtLeast(1)).coerceAtLeast(1)
+            val winnerCorrectCount = (maxScore / 100).coerceIn(0, questionsPerPlayer)
             viewModelScope.launch {
                 repository.saveQuizHistory(
                     mode = "PARTY",
                     score = maxScore,
-                    total = state.totalRounds
+                    total = questionsPerPlayer,
+                    correctCount = winnerCorrectCount
                 )
             }
         } else {
@@ -462,14 +492,19 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
 
         val options = optionsList.mapIndexed { idx, item ->
+            val optionLabel = ('A' + idx)
             val text = when (qType) {
                 QuestionType.FLAG_TO_NAME, QuestionType.CAPITAL_TO_COUNTRY -> item.name
-                QuestionType.NAME_TO_FLAG -> item.name
+                QuestionType.NAME_TO_FLAG -> "Flag $optionLabel"
+            }
+            val optionFlagPng = when (qType) {
+                QuestionType.FLAG_TO_NAME -> ""
+                QuestionType.NAME_TO_FLAG, QuestionType.CAPITAL_TO_COUNTRY -> item.flagPng
             }
             QuizOption(
                 id = item.code,
                 text = text,
-                flagPng = item.flagPng,
+                flagPng = optionFlagPng,
                 isCorrect = idx == correctIndex
             )
         }

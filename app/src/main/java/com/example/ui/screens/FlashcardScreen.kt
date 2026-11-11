@@ -1,6 +1,10 @@
 package com.example.ui.screens
 
+import android.content.Context
+import android.hardware.Sensor
+import android.hardware.SensorManager
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -23,6 +27,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.Sensors
 import androidx.compose.material.icons.filled.Shuffle
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -36,17 +41,22 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedIconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.res.stringResource
+import com.common.shake.UniversalShakeDetector
+import com.common.shake.ui.ShakeSensitivitySettingCard
 import com.example.R
 import com.example.ui.components.SwipeableFlashcard
 import com.example.ui.viewmodel.AppScreen
@@ -64,8 +74,31 @@ fun FlashcardScreen(
     val countries by viewModel.filteredCountries.collectAsState()
     val selectedRegion by viewModel.selectedRegion.collectAsState()
     val favoritesOnly by viewModel.favoritesOnly.collectAsState()
+    val shakeEnabled by viewModel.shakeEnabled.collectAsState()
+    val shakeThreshold by viewModel.shakeThresholdGForce.collectAsState()
 
     var currentIndex by remember(countries.size, selectedRegion, favoritesOnly) { mutableIntStateOf(0) }
+    var showShakeSettings by remember { mutableStateOf(false) }
+
+    val context = LocalContext.current
+    DisposableEffect(shakeEnabled, shakeThreshold, countries.size) {
+        val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as? SensorManager
+        val accelerometer = sensorManager?.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+        val detector = UniversalShakeDetector {
+            if (countries.isNotEmpty()) {
+                currentIndex = countries.indices.random()
+            }
+        }.apply {
+            isEnabled = shakeEnabled
+            thresholdGForce = shakeThreshold
+        }
+        if (sensorManager != null && accelerometer != null && shakeEnabled) {
+            sensorManager.registerListener(detector, accelerometer, SensorManager.SENSOR_DELAY_UI)
+        }
+        onDispose {
+            sensorManager?.unregisterListener(detector)
+        }
+    }
 
     val regions = listOf("All", "Africa", "Americas", "Asia", "Europe", "Oceania")
 
@@ -100,16 +133,38 @@ fun FlashcardScreen(
                     )
                 }
 
-                IconButton(
-                    onClick = { viewModel.setFavoritesOnly(!favoritesOnly) },
-                    modifier = Modifier.testTag("filter_favorites_toggle")
-                ) {
-                    Icon(
-                        imageVector = if (favoritesOnly) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
-                        contentDescription = stringResource(R.string.filter_favorites_only),
-                        tint = if (favoritesOnly) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface
-                    )
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    IconButton(
+                        onClick = { showShakeSettings = !showShakeSettings },
+                        modifier = Modifier.testTag("shake_settings_toggle")
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Sensors,
+                            contentDescription = stringResource(R.string.shake_setting_title),
+                            tint = if (showShakeSettings || shakeEnabled) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                    IconButton(
+                        onClick = { viewModel.setFavoritesOnly(!favoritesOnly) },
+                        modifier = Modifier.testTag("filter_favorites_toggle")
+                    ) {
+                        Icon(
+                            imageVector = if (favoritesOnly) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                            contentDescription = stringResource(R.string.filter_favorites_only),
+                            tint = if (favoritesOnly) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface
+                        )
+                    }
                 }
+            }
+
+            AnimatedVisibility(visible = showShakeSettings) {
+                ShakeSensitivitySettingCard(
+                    isEnabled = shakeEnabled,
+                    thresholdGForce = shakeThreshold,
+                    onEnabledChanged = { viewModel.setShakeEnabled(it) },
+                    onThresholdChanged = { viewModel.setShakeThresholdGForce(it) },
+                    modifier = Modifier.padding(vertical = 6.dp)
+                )
             }
 
             // Region Filter Chips

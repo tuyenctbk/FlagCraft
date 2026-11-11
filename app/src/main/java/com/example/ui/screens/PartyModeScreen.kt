@@ -26,7 +26,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.EmojiEvents
 import androidx.compose.material.icons.filled.Group
+import androidx.compose.material.icons.filled.LocationCity
 import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.Public
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Tv
 import androidx.compose.material3.Button
@@ -67,6 +69,7 @@ import com.example.ui.components.DPadDirection
 import com.example.ui.components.FlagImage
 import com.example.ui.viewmodel.AppScreen
 import com.example.ui.viewmodel.MainViewModel
+import com.example.ui.viewmodel.QuestionType
 
 @Composable
 fun PartyModeScreen(
@@ -80,8 +83,8 @@ fun PartyModeScreen(
     val partyState by viewModel.partyState.collectAsState()
     val focusRequester = remember { FocusRequester() }
 
-    LaunchedEffect(partyState.isStarted) {
-        if (partyState.isStarted) {
+    LaunchedEffect(partyState.isStarted, partyState.currentRound, partyState.isAnswerRevealed) {
+        if (partyState.isStarted && !partyState.isGameOver && !partyState.isAnswerRevealed) {
             focusRequester.requestFocus()
         }
     }
@@ -90,7 +93,8 @@ fun PartyModeScreen(
         modifier = modifier
             .fillMaxSize()
             .onKeyEvent { keyEvent ->
-                if (keyEvent.type == androidx.compose.ui.input.key.KeyEventType.KeyDown) {
+                val isActiveRound = partyState.isStarted && !partyState.isGameOver && !partyState.isAnswerRevealed
+                if (isActiveRound && keyEvent.type == androidx.compose.ui.input.key.KeyEventType.KeyDown) {
                     when (keyEvent.nativeKeyEvent.keyCode) {
                         KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_W, KeyEvent.KEYCODE_1 -> {
                             viewModel.submitPartyAnswer(0) // UP = RED
@@ -113,7 +117,7 @@ fun PartyModeScreen(
                 } else false
             }
             .focusRequester(focusRequester)
-            .focusable()
+            .then(if (partyState.isStarted && !partyState.isGameOver) Modifier.focusable() else Modifier)
     ) {
         if (!partyState.isStarted) {
             // Setup Player Count Screen
@@ -152,6 +156,11 @@ private fun PartySetupView(
     onStartGame: () -> Unit,
     onBack: () -> Unit
 ) {
+    val setupStartButtonFocusRequester = remember { FocusRequester() }
+    LaunchedEffect(Unit) {
+        setupStartButtonFocusRequester.requestFocus()
+    }
+
     BoxWithConstraints(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
@@ -242,12 +251,28 @@ private fun PartySetupView(
                                 selected = partyState.playerCount == count,
                                 onClick = { onSelectPlayerCount(count) },
                                 shape = SegmentedButtonDefaults.itemShape(index = index, count = 4),
+                                icon = {},
                                 modifier = Modifier.testTag("player_count_$count")
                             ) {
-                                Row(verticalAlignment = Alignment.CenterVertically) {
-                                    Icon(imageVector = Icons.Default.Group, contentDescription = null, modifier = Modifier.size(16.dp))
-                                    Spacer(modifier = Modifier.width(4.dp))
-                                    Text(if (count == 1) stringResource(R.string.party_player_count, count) else stringResource(R.string.party_players_count, count))
+                                Column(
+                                    horizontalAlignment = Alignment.CenterHorizontally,
+                                    modifier = Modifier.padding(vertical = 2.dp)
+                                ) {
+                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                        Icon(imageVector = Icons.Default.Group, contentDescription = null, modifier = Modifier.size(15.dp))
+                                        Spacer(modifier = Modifier.width(4.dp))
+                                        Text(
+                                            text = "$count",
+                                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.ExtraBold),
+                                            maxLines = 1
+                                        )
+                                    }
+                                    Text(
+                                        text = if (count == 1) "Player" else "Players",
+                                        style = MaterialTheme.typography.labelSmall,
+                                        maxLines = 1,
+                                        softWrap = false
+                                    )
                                 }
                             }
                         }
@@ -260,6 +285,7 @@ private fun PartySetupView(
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(56.dp)
+                            .focusRequester(setupStartButtonFocusRequester)
                             .testTag("start_party_game_button"),
                         shape = RoundedCornerShape(16.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
@@ -398,13 +424,81 @@ private fun PartyGameRoundView(
 
                 Spacer(modifier = Modifier.height(14.dp))
 
-                FlagImage(
-                    flagUrl = question.country.flagPng,
-                    contentDescription = "Target Flag",
-                    modifier = Modifier
-                        .widthIn(max = if (isWide) 320.dp else 240.dp)
-                        .height(if (isWide) 180.dp else 140.dp)
-                )
+                when (question.questionType) {
+                    QuestionType.FLAG_TO_NAME -> {
+                        FlagImage(
+                            flagUrl = question.country.flagPng,
+                            contentDescription = "Target Flag",
+                            modifier = Modifier
+                                .widthIn(max = if (isWide) 320.dp else 240.dp)
+                                .height(if (isWide) 180.dp else 140.dp)
+                        )
+                    }
+                    QuestionType.NAME_TO_FLAG -> {
+                        Card(
+                            shape = RoundedCornerShape(22.dp),
+                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+                            modifier = Modifier.padding(horizontal = 16.dp)
+                        ) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier.padding(horizontal = 28.dp, vertical = 20.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Public,
+                                    contentDescription = null,
+                                    tint = MaterialTheme.colorScheme.primary,
+                                    modifier = Modifier.size(44.dp)
+                                )
+                                Spacer(modifier = Modifier.width(14.dp))
+                                Column {
+                                    Text(
+                                        text = question.country.name,
+                                        style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.ExtraBold),
+                                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                                    )
+                                    Text(
+                                        text = "${question.country.region} • ${question.country.subregion}",
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f)
+                                    )
+                                }
+                            }
+                        }
+                    }
+                    QuestionType.CAPITAL_TO_COUNTRY -> {
+                        Card(
+                            shape = RoundedCornerShape(22.dp),
+                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
+                            modifier = Modifier.padding(horizontal = 16.dp)
+                        ) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier.padding(horizontal = 28.dp, vertical = 20.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.LocationCity,
+                                    contentDescription = null,
+                                    tint = MaterialTheme.colorScheme.secondary,
+                                    modifier = Modifier.size(44.dp)
+                                )
+                                Spacer(modifier = Modifier.width(14.dp))
+                                Column {
+                                    Text(
+                                        text = question.country.capital,
+                                        style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.ExtraBold),
+                                        color = MaterialTheme.colorScheme.onSecondaryContainer
+                                    )
+                                    Text(
+                                        text = "Continent: ${question.country.region}",
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.8f)
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
             // D-Pad Directional Answer Buttons (2x2 on wide/TV, vertical on narrow phone)
@@ -504,6 +598,11 @@ private fun PartyWinnerView(
     onPlayAgain: () -> Unit,
     onHome: () -> Unit
 ) {
+    val setupStartButtonFocusRequester = remember { FocusRequester() }
+    LaunchedEffect(Unit) {
+        setupStartButtonFocusRequester.requestFocus()
+    }
+
     BoxWithConstraints(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
@@ -656,6 +755,7 @@ private fun PartyWinnerView(
                             onClick = onPlayAgain,
                             modifier = Modifier
                                 .weight(1f)
+                                .focusRequester(setupStartButtonFocusRequester)
                                 .testTag("party_replay_button"),
                             colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
                         ) {

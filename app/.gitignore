@@ -7,3 +7,4 @@
 *.apks
 *.jks
 *.keystore
+local.properties

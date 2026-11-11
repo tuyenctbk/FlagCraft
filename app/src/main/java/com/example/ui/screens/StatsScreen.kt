@@ -40,6 +40,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.res.stringResource
+import com.common.shake.ui.ShakeSensitivitySettingCard
 import com.example.R
 import com.example.data.local.QuizHistoryEntity
 import com.example.ui.viewmodel.AppScreen
@@ -60,6 +61,8 @@ fun StatsScreen(
     val historyList by viewModel.quizHistory.collectAsState()
     val blitzHighScore by viewModel.blitzHighScore.collectAsState()
     val allCountries by viewModel.allCountries.collectAsState()
+    val shakeEnabled by viewModel.shakeEnabled.collectAsState()
+    val shakeThreshold by viewModel.shakeThresholdGForce.collectAsState()
 
     val masteredCount = allCountries.count { it.masteryLevel == 2 }
     val learningCount = allCountries.count { it.masteryLevel == 1 }
@@ -226,7 +229,16 @@ fun StatsScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(12.dp))
+
+            ShakeSensitivitySettingCard(
+                isEnabled = shakeEnabled,
+                thresholdGForce = shakeThreshold,
+                onEnabledChanged = { viewModel.setShakeEnabled(it) },
+                onThresholdChanged = { viewModel.setShakeThresholdGForce(it) }
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
 
             // Static, Non-Intrusive Support Development Card (Permanent Access)
             val isSupporter by viewModel.isSupporter.collectAsState()

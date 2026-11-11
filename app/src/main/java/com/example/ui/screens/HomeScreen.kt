@@ -1,7 +1,11 @@
 package com.example.ui.screens
 
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -22,6 +26,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BarChart
 import androidx.compose.material.icons.filled.Bolt
+import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.EmojiEvents
 import androidx.compose.material.icons.filled.Explore
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Public
@@ -41,13 +47,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.res.stringResource
@@ -108,10 +120,13 @@ fun HomeScreen(
                                 horizontalArrangement = Arrangement.SpaceBetween,
                                 modifier = Modifier.fillMaxWidth()
                             ) {
-                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    modifier = Modifier.weight(1f)
+                                ) {
                                     Box(
                                         modifier = Modifier
-                                            .size(52.dp)
+                                            .size(48.dp)
                                             .clip(CircleShape)
                                             .background(Color.White.copy(alpha = 0.2f)),
                                         contentAlignment = Alignment.Center
@@ -120,7 +135,7 @@ fun HomeScreen(
                                             imageVector = Icons.Default.Public,
                                             contentDescription = "FlagCraft",
                                             tint = Color.White,
-                                            modifier = Modifier.size(32.dp)
+                                            modifier = Modifier.size(28.dp)
                                         )
                                     }
                                     Spacer(modifier = Modifier.width(12.dp))
@@ -155,20 +170,27 @@ fun HomeScreen(
                                         Text(
                                             text = stringResource(R.string.home_tagline),
                                             style = MaterialTheme.typography.bodySmall,
-                                            color = Color.White.copy(alpha = 0.85f)
+                                            color = Color.White.copy(alpha = 0.85f),
+                                            maxLines = 1,
+                                            overflow = TextOverflow.Ellipsis
                                         )
                                     }
                                 }
 
+                                Spacer(modifier = Modifier.width(8.dp))
+
                                 Row(verticalAlignment = Alignment.CenterVertically) {
                                     IconButton(
                                         onClick = { viewModel.openSupportDialog() },
-                                        modifier = Modifier.testTag("support_heart_button")
+                                        modifier = Modifier
+                                            .size(36.dp)
+                                            .testTag("support_heart_button")
                                     ) {
                                         Icon(
                                             imageVector = if (isSupporter) Icons.Default.Star else Icons.Default.Favorite,
                                             contentDescription = stringResource(R.string.home_support_development),
-                                            tint = if (isSupporter) Color(0xFFF59E0B) else Color(0xFFEF4444)
+                                            tint = if (isSupporter) Color(0xFFF59E0B) else Color(0xFFFF6B6B),
+                                            modifier = Modifier.size(22.dp)
                                         )
                                     }
 
@@ -178,8 +200,8 @@ fun HomeScreen(
                                     Icon(
                                         imageVector = Icons.Default.Tv,
                                         contentDescription = stringResource(R.string.home_tv_mode),
-                                        tint = if (isTvPartyMode) Color(0xFFF59E0B) else Color.White.copy(alpha = 0.7f),
-                                        modifier = Modifier.size(24.dp)
+                                        tint = if (isTvPartyMode) Color(0xFFF59E0B) else Color.White.copy(alpha = 0.85f),
+                                        modifier = Modifier.size(20.dp)
                                     )
                                     Spacer(modifier = Modifier.width(4.dp))
                                     Switch(
@@ -207,6 +229,33 @@ fun HomeScreen(
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = Color.White.copy(alpha = 0.9f)
                             )
+
+                            Spacer(modifier = Modifier.height(14.dp))
+
+                            val masteredCount = allCountries.count { it.masteryLevel == 2 }
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                HeroStatChip(
+                                    icon = Icons.Default.Public,
+                                    label = "${allCountries.size} Nations",
+                                    tint = Color(0xFF38BDF8),
+                                    modifier = Modifier.weight(1f)
+                                )
+                                HeroStatChip(
+                                    icon = Icons.Default.CheckCircle,
+                                    label = "$masteredCount Mastered",
+                                    tint = Color(0xFF34D399),
+                                    modifier = Modifier.weight(1f)
+                                )
+                                HeroStatChip(
+                                    icon = Icons.Default.EmojiEvents,
+                                    label = "Best: $blitzHighScore",
+                                    tint = Color(0xFFFBBF24),
+                                    modifier = Modifier.weight(1f)
+                                )
+                            }
                         }
                     }
                 }
@@ -434,6 +483,39 @@ fun HomeScreen(
 }
 
 @Composable
+private fun HeroStatChip(
+    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    label: String,
+    tint: Color,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center,
+        modifier = modifier
+            .clip(RoundedCornerShape(12.dp))
+            .background(Color.Black.copy(alpha = 0.25f))
+            .padding(horizontal = 8.dp, vertical = 6.dp)
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            tint = tint,
+            modifier = Modifier.size(15.dp)
+        )
+        Spacer(modifier = Modifier.width(5.dp))
+        Text(
+            text = label,
+            style = MaterialTheme.typography.labelSmall.copy(
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            ),
+            maxLines = 1
+        )
+    }
+}
+
+@Composable
 private fun GameModeCard(
     title: String,
     subtitle: String,
@@ -443,14 +525,33 @@ private fun GameModeCard(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    var isFocused by remember { mutableStateOf(false) }
+    val scale by animateFloatAsState(
+        targetValue = if (isFocused) 1.03f else 1f,
+        animationSpec = spring(),
+        label = "mode_card_focus_scale"
+    )
+
     Card(
         modifier = modifier
             .fillMaxWidth()
             .testTag(testTag)
+            .graphicsLayer {
+                scaleX = scale
+                scaleY = scale
+            }
+            .then(
+                if (isFocused) Modifier.border(3.dp, Color(0xFF38BDF8), RoundedCornerShape(20.dp))
+                else Modifier
+            )
             .clip(RoundedCornerShape(20.dp))
+            .onFocusChanged { isFocused = it.isFocused }
+            .focusable()
             .clickable(onClick = onClick),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+        colors = CardDefaults.cardColors(
+            containerColor = if (isFocused) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = if (isFocused) 10.dp else 4.dp)
     ) {
         Row(
             modifier = Modifier

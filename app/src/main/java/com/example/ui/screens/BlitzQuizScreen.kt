@@ -1,16 +1,24 @@
 package com.example.ui.screens
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -30,6 +38,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Bolt
 import androidx.compose.material.icons.filled.EmojiEvents
+import androidx.compose.material.icons.filled.LocationCity
+import androidx.compose.material.icons.filled.Public
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Timer
 import androidx.compose.material3.Button
@@ -45,9 +55,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.testTag
@@ -96,89 +111,101 @@ fun BlitzQuizScreen(
                 .fillMaxSize()
                 .widthIn(max = 700.dp)
                 .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceBetween
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Top Bar
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                IconButton(
-                    onClick = { viewModel.navigateTo(AppScreen.HOME) },
-                    modifier = Modifier.testTag("blitz_back_button")
-                ) {
-                    Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.btn_back))
-                }
-
-                // Timer Badge with Pulse
+            // Top Bar + Timer Progress Bar grouped together at top
+            Column(modifier = Modifier.fillMaxWidth()) {
                 Row(
+                    modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .graphicsLayer {
-                            scaleX = timerPulseScale
-                            scaleY = timerPulseScale
-                        }
-                        .clip(RoundedCornerShape(16.dp))
-                        .background(
-                            if (state.timeLeftSeconds <= 10) MaterialTheme.colorScheme.errorContainer
-                            else MaterialTheme.colorScheme.primaryContainer
-                        )
-                        .padding(horizontal = 16.dp, vertical = 8.dp)
+                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.Timer,
-                        contentDescription = stringResource(R.string.blitz_timer),
-                        tint = if (state.timeLeftSeconds <= 10) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary
-                    )
-                    Spacer(modifier = Modifier.width(6.dp))
-                    Text(
-                        text = "${state.timeLeftSeconds}s",
-                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                        color = if (state.timeLeftSeconds <= 10) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary
-                    )
-                }
-
-                // Score & Combo
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    if (state.streak >= 3) {
-                        Box(
-                            modifier = Modifier
-                                .clip(CircleShape)
-                                .background(Color(0xFFF59E0B))
-                                .padding(horizontal = 8.dp, vertical = 4.dp)
-                        ) {
-                            Text(
-                                text = "${(state.streak / 3) + 1}x Combo",
-                                style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
-                                color = Color.White
-                            )
-                        }
-                        Spacer(modifier = Modifier.width(6.dp))
+                    IconButton(
+                        onClick = { viewModel.navigateTo(AppScreen.HOME) },
+                        modifier = Modifier.testTag("blitz_back_button")
+                    ) {
+                        Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.btn_back))
                     }
 
-                    Text(
-                        text = stringResource(R.string.blitz_score_label, state.score),
-                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                        color = MaterialTheme.colorScheme.primary
-                    )
+                    // Timer Badge with Pulse
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier
+                            .graphicsLayer {
+                                scaleX = timerPulseScale
+                                scaleY = timerPulseScale
+                            }
+                            .clip(RoundedCornerShape(16.dp))
+                            .background(
+                                if (state.timeLeftSeconds <= 10) MaterialTheme.colorScheme.errorContainer
+                                else MaterialTheme.colorScheme.primaryContainer
+                            )
+                            .padding(horizontal = 16.dp, vertical = 8.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Timer,
+                            contentDescription = stringResource(R.string.blitz_timer),
+                            tint = if (state.timeLeftSeconds <= 10) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary
+                        )
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text(
+                            text = "${state.timeLeftSeconds}s",
+                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                            color = if (state.timeLeftSeconds <= 10) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary
+                        )
+                    }
+
+                    // Score & Combo
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        if (state.streak >= 3) {
+                            Box(
+                                modifier = Modifier
+                                    .clip(CircleShape)
+                                    .background(Color(0xFFF59E0B))
+                                    .padding(horizontal = 8.dp, vertical = 4.dp)
+                            ) {
+                                Text(
+                                    text = "${(state.streak / 3) + 1}x Combo",
+                                    style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
+                                    color = Color.White
+                                )
+                            }
+                            Spacer(modifier = Modifier.width(6.dp))
+                        }
+
+                        val animatedScore by animateIntAsState(
+                            targetValue = state.score,
+                            animationSpec = tween(durationMillis = 300),
+                            label = "score_anim"
+                        )
+                        Text(
+                            text = stringResource(R.string.blitz_score_label, animatedScore),
+                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    }
                 }
+
+                // Timer Progress Bar directly under Top Bar
+                LinearProgressIndicator(
+                    progress = { state.timeLeftSeconds / 60f },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp),
+                    color = if (state.timeLeftSeconds <= 10) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
+                    trackColor = MaterialTheme.colorScheme.surfaceVariant
+                )
             }
 
-            // Timer Progress Bar
-            LinearProgressIndicator(
-                progress = { state.timeLeftSeconds / 60f },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
-                color = if (state.timeLeftSeconds <= 10) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
-                trackColor = MaterialTheme.colorScheme.surfaceVariant
-            )
-
             if (state.isGameOver) {
-                // GameOver Score Card
-                AnimatedVisibility(visible = true, enter = fadeIn() + scaleIn()) {
+                // GameOver Score Card centered in remaining screen space
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxWidth(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    androidx.compose.animation.AnimatedVisibility(visible = true, enter = fadeIn() + scaleIn()) {
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -310,6 +337,7 @@ fun BlitzQuizScreen(
                         }
                     }
                 }
+                }
             } else {
                 val question = state.currentQuestion
                 if (question != null) {
@@ -327,75 +355,149 @@ fun BlitzQuizScreen(
                             color = MaterialTheme.colorScheme.onBackground
                         )
 
-                        // Question Flag
-                        if (question.questionType != QuestionType.NAME_TO_FLAG) {
-                            FlagImage(
-                                flagUrl = question.country.flagPng,
-                                contentDescription = "Target Flag",
-                                modifier = Modifier
-                                    .width(220.dp)
-                                    .height(130.dp)
-                            )
+                         // Question Visual Prompt
+                        when (question.questionType) {
+                            QuestionType.FLAG_TO_NAME -> {
+                                FlagImage(
+                                    flagUrl = question.country.flagPng,
+                                    contentDescription = "Target Flag",
+                                    modifier = Modifier
+                                        .width(220.dp)
+                                        .height(130.dp)
+                                )
+                            }
+                            QuestionType.NAME_TO_FLAG -> {
+                                Card(
+                                    shape = RoundedCornerShape(20.dp),
+                                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+                                    modifier = Modifier.padding(horizontal = 16.dp)
+                                ) {
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        modifier = Modifier.padding(horizontal = 24.dp, vertical = 16.dp)
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.Default.Public,
+                                            contentDescription = null,
+                                            tint = MaterialTheme.colorScheme.primary,
+                                            modifier = Modifier.size(36.dp)
+                                        )
+                                        Spacer(modifier = Modifier.width(12.dp))
+                                        Column {
+                                            Text(
+                                                text = question.country.name,
+                                                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.ExtraBold),
+                                                color = MaterialTheme.colorScheme.onPrimaryContainer
+                                            )
+                                            Text(
+                                                text = "${question.country.region} • ${question.country.subregion}",
+                                                style = MaterialTheme.typography.bodySmall,
+                                                color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f)
+                                            )
+                                        }
+                                    }
+                                }
+                            }
+                            QuestionType.CAPITAL_TO_COUNTRY -> {
+                                Card(
+                                    shape = RoundedCornerShape(20.dp),
+                                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
+                                    modifier = Modifier.padding(horizontal = 16.dp)
+                                ) {
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        modifier = Modifier.padding(horizontal = 24.dp, vertical = 16.dp)
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.Default.LocationCity,
+                                            contentDescription = null,
+                                            tint = MaterialTheme.colorScheme.secondary,
+                                            modifier = Modifier.size(36.dp)
+                                        )
+                                        Spacer(modifier = Modifier.width(12.dp))
+                                        Column {
+                                            Text(
+                                                text = question.country.capital,
+                                                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.ExtraBold),
+                                                color = MaterialTheme.colorScheme.onSecondaryContainer
+                                            )
+                                            Text(
+                                                text = "Region: ${question.country.region}",
+                                                style = MaterialTheme.typography.bodySmall,
+                                                color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.8f)
+                                            )
+                                        }
+                                    }
+                                }
+                            }
                         }
 
                         // 4 Options Grid (2x2 on wide screen, vertical list on mobile)
-                        if (isWide) {
-                            Column(
-                                modifier = Modifier.fillMaxWidth(),
-                                verticalArrangement = Arrangement.spacedBy(10.dp)
-                            ) {
-                                Row(
+                        AnimatedContent(
+                            targetState = question,
+                            transitionSpec = {
+                                fadeIn(animationSpec = tween(220)) togetherWith fadeOut(animationSpec = tween(160))
+                            },
+                            label = "blitz_question_options_transition"
+                        ) { currentQ ->
+                            if (isWide) {
+                                Column(
                                     modifier = Modifier.fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                                    verticalArrangement = Arrangement.spacedBy(10.dp)
                                 ) {
-                                    QuizOptionCard(
-                                        question = question,
-                                        index = 0,
-                                        state = state,
-                                        onClick = { viewModel.answerBlitzQuestion(0) },
-                                        modifier = Modifier.weight(1f)
-                                    )
-                                    QuizOptionCard(
-                                        question = question,
-                                        index = 1,
-                                        state = state,
-                                        onClick = { viewModel.answerBlitzQuestion(1) },
-                                        modifier = Modifier.weight(1f)
-                                    )
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.spacedBy(10.dp)
+                                    ) {
+                                        QuizOptionCard(
+                                            question = currentQ,
+                                            index = 0,
+                                            state = state,
+                                            onClick = { viewModel.answerBlitzQuestion(0) },
+                                            modifier = Modifier.weight(1f)
+                                        )
+                                        QuizOptionCard(
+                                            question = currentQ,
+                                            index = 1,
+                                            state = state,
+                                            onClick = { viewModel.answerBlitzQuestion(1) },
+                                            modifier = Modifier.weight(1f)
+                                        )
+                                    }
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.spacedBy(10.dp)
+                                    ) {
+                                        QuizOptionCard(
+                                            question = currentQ,
+                                            index = 2,
+                                            state = state,
+                                            onClick = { viewModel.answerBlitzQuestion(2) },
+                                            modifier = Modifier.weight(1f)
+                                        )
+                                        QuizOptionCard(
+                                            question = currentQ,
+                                            index = 3,
+                                            state = state,
+                                            onClick = { viewModel.answerBlitzQuestion(3) },
+                                            modifier = Modifier.weight(1f)
+                                        )
+                                    }
                                 }
-                                Row(
+                            } else {
+                                Column(
                                     modifier = Modifier.fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                                    verticalArrangement = Arrangement.spacedBy(10.dp)
                                 ) {
-                                    QuizOptionCard(
-                                        question = question,
-                                        index = 2,
-                                        state = state,
-                                        onClick = { viewModel.answerBlitzQuestion(2) },
-                                        modifier = Modifier.weight(1f)
-                                    )
-                                    QuizOptionCard(
-                                        question = question,
-                                        index = 3,
-                                        state = state,
-                                        onClick = { viewModel.answerBlitzQuestion(3) },
-                                        modifier = Modifier.weight(1f)
-                                    )
-                                }
-                            }
-                        } else {
-                            Column(
-                                modifier = Modifier.fillMaxWidth(),
-                                verticalArrangement = Arrangement.spacedBy(10.dp)
-                            ) {
-                                question.options.forEachIndexed { index, _ ->
-                                    QuizOptionCard(
-                                        question = question,
-                                        index = index,
-                                        state = state,
-                                        onClick = { viewModel.answerBlitzQuestion(index) },
-                                        modifier = Modifier.fillMaxWidth()
-                                    )
+                                    currentQ.options.forEachIndexed { index, _ ->
+                                        QuizOptionCard(
+                                            question = currentQ,
+                                            index = index,
+                                            state = state,
+                                            onClick = { viewModel.answerBlitzQuestion(index) },
+                                            modifier = Modifier.fillMaxWidth()
+                                        )
+                                    }
                                 }
                             }
                         }
@@ -419,19 +521,37 @@ private fun QuizOptionCard(
     val isCorrect = index == question.correctIndex
     val isAnswered = state.selectedOptionIndex != null
 
+    var isFocused by remember { mutableStateOf(false) }
+    val scale by animateFloatAsState(
+        targetValue = if (isFocused) 1.03f else 1f,
+        animationSpec = spring(),
+        label = "blitz_option_scale"
+    )
+
     val containerColor = when {
         isAnswered && isCorrect -> Color(0xFF10B981)
         isAnswered && isSelected && !isCorrect -> Color(0xFFEF4444)
+        isFocused -> MaterialTheme.colorScheme.primaryContainer
         else -> MaterialTheme.colorScheme.surfaceVariant
     }
 
     Card(
         modifier = modifier
             .testTag("blitz_option_$index")
+            .graphicsLayer {
+                scaleX = scale
+                scaleY = scale
+            }
+            .then(
+                if (isFocused) Modifier.border(2.5.dp, Color(0xFF38BDF8), RoundedCornerShape(16.dp))
+                else Modifier
+            )
             .clip(RoundedCornerShape(16.dp))
+            .onFocusChanged { isFocused = it.isFocused }
+            .focusable()
             .clickable(enabled = !isAnswered, onClick = onClick),
         colors = CardDefaults.cardColors(containerColor = containerColor),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = if (isFocused) 8.dp else 4.dp)
     ) {
         Row(
             modifier = Modifier
@@ -439,11 +559,15 @@ private fun QuizOptionCard(
                 .padding(14.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            if (question.questionType == QuestionType.NAME_TO_FLAG && option.flagPng.isNotEmpty()) {
+            if (option.flagPng.isNotEmpty()) {
                 FlagImage(
                     flagUrl = option.flagPng,
                     contentDescription = option.text,
-                    modifier = Modifier.size(width = 48.dp, height = 32.dp)
+                    modifier = if (question.questionType == QuestionType.NAME_TO_FLAG) {
+                        Modifier.size(width = 72.dp, height = 46.dp)
+                    } else {
+                        Modifier.size(width = 48.dp, height = 32.dp)
+                    }
                 )
                 Spacer(modifier = Modifier.width(14.dp))
             }

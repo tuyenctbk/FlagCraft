@@ -1,8 +1,9 @@
-# IntelliJ / Android Studio
+# IntelliJ / Android Studio / VS Code
 *.iml
 .idea/
 *.ipr
 *.iws
+.vscode/
 
 # Gradle & Kotlin
 .gradle/
@@ -29,13 +30,13 @@ debug.keystore
 *.dex
 *.class
 
-# Native build & captures
+# Native build & profiling captures
 captures/
 .externalNativeBuild/
 .cxx/
+*.hprof
 
 # OS & Logs
 .DS_Store
 Thumbs.db
 *.log
-*.hprof

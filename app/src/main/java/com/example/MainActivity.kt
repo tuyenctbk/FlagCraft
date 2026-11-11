@@ -4,9 +4,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -22,6 +25,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -133,7 +137,7 @@ fun FlagCraftApp(
 
         if (isWideScreen && !isImmersiveGame) {
             // Tablet / Desktop / Android TV layout with NavigationRail on the left
-            Row(modifier = Modifier.fillMaxSize()) {
+            Row(modifier = Modifier.fillMaxSize().systemBarsPadding()) {
                 NavigationRail(
                     modifier = Modifier
                         .fillMaxHeight()
@@ -275,12 +279,20 @@ private fun ScreenContent(
     viewModel: MainViewModel,
     modifier: Modifier
 ) {
-    when (currentScreen) {
-        AppScreen.HOME -> HomeScreen(viewModel = viewModel, modifier = modifier)
-        AppScreen.FLASHCARD -> FlashcardScreen(viewModel = viewModel, modifier = modifier)
-        AppScreen.BLITZ_QUIZ -> BlitzQuizScreen(viewModel = viewModel, modifier = modifier)
-        AppScreen.PARTY_MODE -> PartyModeScreen(viewModel = viewModel, modifier = modifier)
-        AppScreen.EXPLORER -> CountryExplorerScreen(viewModel = viewModel, modifier = modifier)
-        AppScreen.STATS -> StatsScreen(viewModel = viewModel, modifier = modifier)
+    AnimatedContent(
+        targetState = currentScreen,
+        transitionSpec = {
+            fadeIn(animationSpec = tween(220)) togetherWith fadeOut(animationSpec = tween(180))
+        },
+        label = "screen_transition"
+    ) { targetScreen ->
+        when (targetScreen) {
+            AppScreen.HOME -> HomeScreen(viewModel = viewModel, modifier = modifier)
+            AppScreen.FLASHCARD -> FlashcardScreen(viewModel = viewModel, modifier = modifier)
+            AppScreen.BLITZ_QUIZ -> BlitzQuizScreen(viewModel = viewModel, modifier = modifier)
+            AppScreen.PARTY_MODE -> PartyModeScreen(viewModel = viewModel, modifier = modifier)
+            AppScreen.EXPLORER -> CountryExplorerScreen(viewModel = viewModel, modifier = modifier)
+            AppScreen.STATS -> StatsScreen(viewModel = viewModel, modifier = modifier)
+        }
     }
 }
