@@ -123,8 +123,9 @@ class BillingManager(
                 .setProductList(productList)
                 .build()
 
-            client.queryProductDetailsAsync(params) { billingResult, productDetailsList ->
+            client.queryProductDetailsAsync(params) { billingResult, productDetailsResult ->
                 if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+                    val productDetailsList = productDetailsResult.productDetailsList
                     val map = productDetailsList.associateBy { it.productId }
                     _productDetailsMap.value = map
                     Log.d(TAG, "Fetched ${map.size} donation products from Google Play Billing")
