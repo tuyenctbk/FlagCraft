@@ -23,6 +23,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Clear
@@ -208,7 +209,7 @@ fun CountryExplorerScreen(
 
     // Country Detail Bottom Sheet
     selectedCountryForDetails?.let { country ->
-        val sheetState = rememberModalBottomSheetState()
+        val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
         ModalBottomSheet(
             onDismissRequest = { selectedCountryForDetails = null },
             sheetState = sheetState
@@ -217,6 +218,7 @@ fun CountryExplorerScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .widthIn(max = 600.dp)
+                    .verticalScroll(rememberScrollState())
                     .padding(24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -258,7 +260,7 @@ fun CountryExplorerScreen(
                     DetailText(label = stringResource(R.string.explorer_details_status), value = if (country.masteryLevel == 2) stringResource(R.string.flashcards_status_mastered) else stringResource(R.string.flashcards_status_learning))
                 }
 
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(36.dp))
             }
         }
     }

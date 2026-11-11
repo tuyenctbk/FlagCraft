@@ -2,6 +2,7 @@ package com.example
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.AnimatedContent
@@ -48,6 +49,7 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -82,22 +84,31 @@ import com.example.ui.viewmodel.MainViewModel
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT),
+            navigationBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT)
+        )
         setContent {
             FlagCraftTheme {
                 var showSplash by remember { mutableStateOf(true) }
 
-                Box(modifier = Modifier.fillMaxSize()) {
-                    FlagCraftApp()
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background,
+                    contentColor = MaterialTheme.colorScheme.onBackground
+                ) {
+                    Box(modifier = Modifier.fillMaxSize()) {
+                        FlagCraftApp()
 
-                    AnimatedVisibility(
-                        visible = showSplash,
-                        enter = fadeIn(),
-                        exit = fadeOut()
-                    ) {
-                        SplashScreen(
-                            onSplashFinished = { showSplash = false }
-                        )
+                        AnimatedVisibility(
+                            visible = showSplash,
+                            enter = fadeIn(),
+                            exit = fadeOut()
+                        ) {
+                            SplashScreen(
+                                onSplashFinished = { showSplash = false }
+                            )
+                        }
                     }
                 }
             }

@@ -17,7 +17,7 @@
     <string name="btn_clear">Clear</string>
 
     <!-- Home Screen -->
-    <string name="home_tagline">World Flags • TV Couch Showdown</string>
+    <string name="home_tagline">World Flags &amp; TV Trivia</string>
     <string name="home_supporter_badge">SUPPORTER ⭐</string>
     <string name="home_support_development">Support Development</string>
     <string name="home_tv_mode">TV Mode</string>

@@ -44,7 +44,7 @@ private val LightColorScheme = lightColorScheme(
 
 @Composable
 fun FlagCraftTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    darkTheme: Boolean = true, // Deep navy dark palette provides optimal contrast for world flags and TV screens
     dynamicColor: Boolean = false, // Set false by default to preserve distinct geography flag colors
     content: @Composable () -> Unit
 ) {

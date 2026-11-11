@@ -10,6 +10,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -91,16 +92,17 @@ fun SwipeableFlashcard(
     val swipeProgress = (dragOffsetX.value / 250f).coerceIn(-1f, 1f)
     val cardRotationZ = swipeProgress * 10f
 
-    Box(
+    BoxWithConstraints(
         modifier = modifier
             .fillMaxWidth()
             .widthIn(max = 560.dp),
         contentAlignment = Alignment.Center
     ) {
+        val isCompactHeight = maxHeight < 360.dp
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(min = 380.dp, max = 460.dp)
+                .heightIn(min = if (isCompactHeight) 220.dp else 380.dp, max = 460.dp)
                 .offset { IntOffset(dragOffsetX.value.roundToInt(), 0) }
                 .graphicsLayer {
                     rotationY = rotation
@@ -136,8 +138,8 @@ fun SwipeableFlashcard(
                         }
                     )
                 }
-                .clickable { isFlipped = !isFlipped }
                 .testTag("swipeable_flashcard"),
+            onClick = { isFlipped = !isFlipped },
             shape = RoundedCornerShape(28.dp),
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.surfaceVariant
@@ -209,7 +211,7 @@ fun SwipeableFlashcard(
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(top = 16.dp),
+                            .padding(top = if (isCompactHeight) 4.dp else 16.dp),
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.SpaceBetween
                     ) {
@@ -218,10 +220,10 @@ fun SwipeableFlashcard(
                                 flagUrl = country.flagPng,
                                 contentDescription = "Flag of ${country.name}",
                                 modifier = Modifier
-                                    .widthIn(max = 240.dp)
-                                    .height(140.dp)
+                                    .widthIn(max = if (isCompactHeight) 180.dp else 240.dp)
+                                    .height(if (isCompactHeight) 100.dp else 140.dp)
                             )
-                            Spacer(modifier = Modifier.height(16.dp))
+                            Spacer(modifier = Modifier.height(if (isCompactHeight) 8.dp else 16.dp))
                             Text(
                                 text = country.name,
                                 style = MaterialTheme.typography.headlineMedium.copy(
@@ -252,7 +254,7 @@ fun SwipeableFlashcard(
                             horizontalArrangement = Arrangement.Center,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(bottom = 6.dp)
+                                .padding(bottom = if (isCompactHeight) 2.dp else 6.dp)
                         ) {
                             Icon(
                                 imageVector = Icons.Default.FlipCameraAndroid,

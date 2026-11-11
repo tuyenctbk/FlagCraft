@@ -4,6 +4,7 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -76,7 +77,7 @@ fun StatsScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .widthIn(max = 840.dp)
-                .padding(16.dp)
+                .padding(horizontal = 16.dp, vertical = 12.dp)
         ) {
             // Header Bar
             Row(
@@ -96,186 +97,195 @@ fun StatsScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
-
-            // High Score & Mastery Overview Cards
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                Card(
-                    modifier = Modifier
-                        .weight(1f)
-                        .testTag("blitz_high_score_card"),
-                    shape = RoundedCornerShape(18.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
-                ) {
-                    Column(
-                        modifier = Modifier.padding(16.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Icon(imageVector = Icons.Default.EmojiEvents, contentDescription = null, tint = Color(0xFFF59E0B))
-                        Spacer(modifier = Modifier.height(6.dp))
-                        Text(text = stringResource(R.string.stats_blitz_best), style = MaterialTheme.typography.labelSmall)
-                        Text(
-                            text = stringResource(R.string.blitz_score_label, blitzHighScore),
-                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                    }
-                }
-
-                Card(
-                    modifier = Modifier
-                        .weight(1f)
-                        .testTag("mastered_count_card"),
-                    shape = RoundedCornerShape(18.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
-                ) {
-                    Column(
-                        modifier = Modifier.padding(16.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Icon(imageVector = Icons.Default.CheckCircle, contentDescription = null, tint = Color(0xFF10B981))
-                        Spacer(modifier = Modifier.height(6.dp))
-                        Text(text = stringResource(R.string.stats_cards_mastered), style = MaterialTheme.typography.labelSmall)
-                        Text(
-                            text = "$masteredCount / $totalCount",
-                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                            color = Color(0xFF10B981)
-                        )
-                    }
-                }
-            }
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            // Card Deck Progress Bar
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(18.dp),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
-            ) {
-                Column(modifier = Modifier.padding(16.dp)) {
-                    Text(
-                        text = stringResource(R.string.stats_cards_overview),
-                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
-                    )
-
-                    Spacer(modifier = Modifier.height(8.dp))
-
-                    LinearProgressIndicator(
-                        progress = { masteredCount.toFloat() / totalCount },
-                        modifier = Modifier.fillMaxWidth(),
-                        color = Color(0xFF10B981),
-                        trackColor = MaterialTheme.colorScheme.surface
-                    )
-
-                    Spacer(modifier = Modifier.height(8.dp))
-
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Text(text = "${stringResource(R.string.stats_cards_mastered)}: $masteredCount", style = MaterialTheme.typography.labelSmall)
-                        Text(text = "${stringResource(R.string.stats_cards_learning)}: $learningCount", style = MaterialTheme.typography.labelSmall)
-                        Text(text = "${stringResource(R.string.region_all)}: $totalCount", style = MaterialTheme.typography.labelSmall)
-                    }
-                }
-            }
-
-            Spacer(modifier = Modifier.height(24.dp))
-
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(imageVector = Icons.Default.History, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(
-                    text = stringResource(R.string.stats_recent_history),
-                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
-                )
-            }
-
             Spacer(modifier = Modifier.height(12.dp))
 
-            if (historyList.isEmpty()) {
-                Column(
-                    modifier = Modifier
-                        .weight(1f)
-                        .fillMaxWidth(),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.BarChart,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
-                        modifier = Modifier.size(48.dp)
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = stringResource(R.string.stats_history_empty),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
+            LazyColumn(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(14.dp),
+                contentPadding = PaddingValues(bottom = 24.dp)
+            ) {
+                // High Score & Mastery Overview Cards
+                item {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        Card(
+                            modifier = Modifier
+                                .weight(1f)
+                                .testTag("blitz_high_score_card"),
+                            shape = RoundedCornerShape(18.dp),
+                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+                        ) {
+                            Column(
+                                modifier = Modifier.padding(16.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Icon(imageVector = Icons.Default.EmojiEvents, contentDescription = null, tint = Color(0xFFF59E0B))
+                                Spacer(modifier = Modifier.height(6.dp))
+                                Text(text = stringResource(R.string.stats_blitz_best), style = MaterialTheme.typography.labelSmall)
+                                Text(
+                                    text = stringResource(R.string.blitz_score_label, blitzHighScore),
+                                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                                    color = MaterialTheme.colorScheme.primary
+                                )
+                            }
+                        }
+
+                        Card(
+                            modifier = Modifier
+                                .weight(1f)
+                                .testTag("mastered_count_card"),
+                            shape = RoundedCornerShape(18.dp),
+                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+                        ) {
+                            Column(
+                                modifier = Modifier.padding(16.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Icon(imageVector = Icons.Default.CheckCircle, contentDescription = null, tint = Color(0xFF10B981))
+                                Spacer(modifier = Modifier.height(6.dp))
+                                Text(text = stringResource(R.string.stats_cards_mastered), style = MaterialTheme.typography.labelSmall)
+                                Text(
+                                    text = "$masteredCount / $totalCount",
+                                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                                    color = Color(0xFF10B981)
+                                )
+                            }
+                        }
+                    }
                 }
-            } else {
-                LazyColumn(
-                    modifier = Modifier.weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(10.dp)
-                ) {
+
+                // Card Deck Progress Bar
+                item {
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(18.dp),
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+                    ) {
+                        Column(modifier = Modifier.padding(16.dp)) {
+                            Text(
+                                text = stringResource(R.string.stats_cards_overview),
+                                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
+                            )
+
+                            Spacer(modifier = Modifier.height(8.dp))
+
+                            LinearProgressIndicator(
+                                progress = { masteredCount.toFloat() / totalCount },
+                                modifier = Modifier.fillMaxWidth(),
+                                color = Color(0xFF10B981),
+                                trackColor = MaterialTheme.colorScheme.surface
+                            )
+
+                            Spacer(modifier = Modifier.height(8.dp))
+
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                Text(text = "${stringResource(R.string.stats_cards_mastered)}: $masteredCount", style = MaterialTheme.typography.labelSmall)
+                                Text(text = "${stringResource(R.string.stats_cards_learning)}: $learningCount", style = MaterialTheme.typography.labelSmall)
+                                Text(text = "${stringResource(R.string.region_all)}: $totalCount", style = MaterialTheme.typography.labelSmall)
+                            }
+                        }
+                    }
+                }
+
+                item {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(imageVector = Icons.Default.History, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = stringResource(R.string.stats_recent_history),
+                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
+                        )
+                    }
+                }
+
+                if (historyList.isEmpty()) {
+                    item {
+                        Card(
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(16.dp),
+                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+                        ) {
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(24.dp),
+                                verticalArrangement = Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.BarChart,
+                                    contentDescription = null,
+                                    tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
+                                    modifier = Modifier.size(40.dp)
+                                )
+                                Spacer(modifier = Modifier.height(8.dp))
+                                Text(
+                                    text = stringResource(R.string.stats_history_empty),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                        }
+                    }
+                } else {
                     items(historyList) { history ->
                         HistoryItemCard(history = history)
                     }
                 }
-            }
 
-            Spacer(modifier = Modifier.height(12.dp))
+                item {
+                    ShakeSensitivitySettingCard(
+                        isEnabled = shakeEnabled,
+                        thresholdGForce = shakeThreshold,
+                        onEnabledChanged = { viewModel.setShakeEnabled(it) },
+                        onThresholdChanged = { viewModel.setShakeThresholdGForce(it) }
+                    )
+                }
 
-            ShakeSensitivitySettingCard(
-                isEnabled = shakeEnabled,
-                thresholdGForce = shakeThreshold,
-                onEnabledChanged = { viewModel.setShakeEnabled(it) },
-                onThresholdChanged = { viewModel.setShakeThresholdGForce(it) }
-            )
-
-            Spacer(modifier = Modifier.height(12.dp))
-
-            // Static, Non-Intrusive Support Development Card (Permanent Access)
-            val isSupporter by viewModel.isSupporter.collectAsState()
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .testTag("stats_support_card"),
-                shape = RoundedCornerShape(18.dp),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text(
-                            text = if (isSupporter) "⭐ Active Supporter" else "☕ Support Independent Dev",
-                            style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                        Text(
-                            text = if (isSupporter) "Thank you for supporting FlagCraft! All donation prompts are permanently disabled."
-                            else "FlagCraft is 100% ad-free & offline friendly. Consider supporting independent development!",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.85f)
-                        )
-                    }
-                    if (!isSupporter) {
-                        Spacer(modifier = Modifier.width(12.dp))
-                        androidx.compose.material3.Button(
-                            onClick = { viewModel.openSupportDialog() },
-                            modifier = Modifier.testTag("stats_support_button")
+                // Static, Non-Intrusive Support Development Card (Permanent Access)
+                item {
+                    val isSupporter by viewModel.isSupporter.collectAsState()
+                    Card(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .testTag("stats_support_card"),
+                        shape = RoundedCornerShape(18.dp),
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
                         ) {
-                            Text("Support ☕", style = MaterialTheme.typography.labelMedium)
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text(
+                                    text = if (isSupporter) "⭐ Active Supporter" else "☕ Support Independent Dev",
+                                    style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                                Text(
+                                    text = if (isSupporter) "Thank you for supporting FlagCraft! All donation prompts are permanently disabled."
+                                    else "FlagCraft is 100% ad-free & offline friendly. Consider supporting independent development!",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.85f)
+                                )
+                            }
+                            if (!isSupporter) {
+                                Spacer(modifier = Modifier.width(12.dp))
+                                androidx.compose.material3.Button(
+                                    onClick = { viewModel.openSupportDialog() },
+                                    modifier = Modifier.testTag("stats_support_button")
+                                ) {
+                                    Text("Support ☕", style = MaterialTheme.typography.labelMedium)
+                                }
+                            }
                         }
                     }
                 }
